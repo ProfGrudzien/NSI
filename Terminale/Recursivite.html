@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../style.css"/>
+        <link rel="stylesheet" href="recursivite.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Récursivité</h1>
+            <p>
+                Dans cette activité, nous allons découvrir le principe de la récursivité.
+            </p>
+            <h2>Retour sur un exercice précédent</h2>
+            <div class="exercice">
+                Ecrire une fonction qui demande un identifiant à l'utilisateur.
+                Cette fonction doit redemander un identifiant jusqu'à ce que l'utilisateur donne un identifiant non vide (différent de <mark class="code">""</mark>)
+            </div>
+            <p>
+                Cette fonction est constuite sur la logique suivante : demander un identifiant tant que l'identifiant donné par l'utilisateur est vide.
+            </p>
+            <p>
+                On peut adopter une autre logique : demander un identifiant à l'utilisateur puis, s'il est vide, demander à nouveau un identifiant à l'utilisateur.
+            </p>
+            <div class="exercice">
+                Compléter la fonction suivante :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        def demander_identifiant() : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;identifiant = input("Quel est votre identifiant ? ") <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if identifiant != "" :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ...<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;else :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Erreur de saisie.")<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ...<br/>
+                    </p>
+                </div>
+            </div>
+            <h2>Définition</h2>
+            <p>
+                Une fonction est récursive si elle se définit à partir d'elle-même. Par exemple, une fonction qui comporte, dans son corps, au moins un appel à elle-même est une fonction récursive.
+            </p>
+            <p>
+                Les fonctions basées sur une simple boucle <mark class="code">while</mark> peuvent très facilement être traduite en fonction récursive. Exemple :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        def nombre_bits(n) : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;""" Retourne le nombre de bits nécessaire pour coder un entier naturel en binaire.<br/>
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;n : le nombre entier naturel écrit en base 10.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"""<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;assert n >= 0, 'Cette fonction attend un entier positif ou nul'<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;compteur = 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;while n > 1 : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n = n // 2<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;compteur = compteur + 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return compteur<br/>
+                    </p>
+                </div>
+                Se traduit de manière récursive en :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        def nombre_bits(n) : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;""" Retourne le nombre de bits nécessaire pour coder un entier naturel en binaire.<br/>
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;n : le nombre entier naturel écrit en base 10.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"""<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;assert n >= 0, 'Cette fonction attend un entier positif ou nul'<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if n > 1 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1 + nombre_bits(n//2)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;else :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br/>
+                    </p>
+                </div>
+            </p>
+            <p>
+            Tout comme lorsque l'on écrit des boucles <mark class="code">while</mark>, il faut être très vigilent sur la condition d'arrêt d'une fonction récursive. Lorsque ces conditions sont mal écrites, le message d'erreur <mark class="code">'maximum recursion depth exceeded'</mark> apparaît.
+            </p>
+            <img src="images/Gru.jpg">
+            <div class="exercice">
+                Ecrire une fonction qui énumèrent les éléments d'une liste, c'est-à-dire qui retourne une chaîne de caractère composée des éléments séparés par une virgule ou par un « et » et termine l'énumération par un point.<br/>Exemple :<br/><mark class="code">enumeration(["pêche", "pomme", "poire", "abricot"])</mark><br/>donne :<br/><mark class="code">"pêche, pomme, poire et abricot."</mark>
+            </div>
+            <div class="exercice">
+                Ecrire une fonction récursive qui retourne le plus grand élément d'une liste de nombres entiers.
+            </div>
+            <div class="exercice">
+                Ecrire une fonction récursive qui vérifie si une chaîne de caractères est un palindrome (identique en la lisant de la droite vers la gauche ou de la gauche vers la droite).<br/>
+                La fonction sera alors testée avec les chaînes de caractères :
+                <ul>
+                    <li>EMMA</li>
+                    <li>ANNA</li>
+                    <li>canoë</li>
+                    <li>kayak</li>
+                    <li>azfghza</li>
+                    <li>engage le jeu que je le gagne</li>
+                </ul>
+                Pour aller plus loin :<br>
+                Modifier cette fonction pour qu'elle ignore les espaces.
+            </div>
+            <div class="exercice">
+                Ecrire une fonction récursive qui vérifie si deux chaînes de caractères sont des anagrammes (composées des mêmes lettres).<br/>
+                Cette fonction peut faire appel à la fonction <mark class="code">premier_indice</mark> suivante :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        def premier_indice(liste, valeur, offset=0) : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;""" Si `valeur` est dans la liste `liste`, retourne le premier indice où l'on trouve cette valeur. Sinon, retourne -1<br/>
+                        <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;liste&nbsp;  : la liste où l'on cherche une valeur.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;valeur : la valeur que l'on cherche dans la liste.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;offset : le nombre de valeurs déjà écartées par récurrence.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"""<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if len(liste) == 0 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return -1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;elif liste[0] == valeur :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return offset<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;else :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return premier_indice(liste[1:], valeur, offset+1)<br/>
+                    </p>
+                </div>
+            </div>
+            <h2>Pile des appels récursifs</h2>
+            <p>
+                Le premier appel de la fonction récursifs doit attendre le résultat des autres appels récursifs.
+                Pour cela, les appels sont stockés dans une «&nbsp;pile d'exécution&nbsp;». Les piles sont des structures algorithmiques qui seront étudiés en détails plus tard dans l'année.
+            </p>
+            <p>
+                Dans la pratique, ces piles ne sont pas de tailles infinies. L'écriture d'une fonction récursive sans prendre de précaution peut mener à remplir cette pile est entraîne un dépassement de mémoire. C'est la raison du message <mark class="code">'maximum recursion depth exceeded'</mark>.
+            </p>
+            <p>
+                Voici une illustration de la pile d'appels récursifs lorsque l'on utilise la fonction récursive <mark class="code">maximum</mark> de l'exercice 4 (plus grand élément d'une liste) sur la liste <mark class="code">[10, 8, 4, 9, 7]</mark>
+            </p>
+            <div class="algo" id="pile">
+                <p class="code" id="lvl5">maximum([7])</p>
+                <p class="code" id="lvl4">maximum([9, 7])</p>
+                <p class="code" id="lvl3">maximum([4, 9, 7])</p>
+                <p class="code" id="lvl2">maximum([8, 4, 9, 7])</p>
+                <p class="code" id="lvl1">maximum([10, 8, 4, 9, 7])</p>
+            </div>
+            <div align="center">
+                <input type="button" value="<" id="prev" class="navigation"></input>
+                <input type="button" value=">" id="next" class="navigation"></input>
+            </div>
+            <script type="text/javascript" src="recursivite.js"></script>
+            <div class="exercice">
+                Ecrire la pile d'exécution lors lors de l'appel de <mark class="code">est_palydrome("kayak")</mark> (exercice 5).
+            </div>
+            <h2>Applications</h2>
+            <h3>Recherche dichotomique</h3>
+            <p>
+                La recherche dichotomique est un algorithme de recherche d'une valeur dans une liste <mark>triée</mark> vu en première.<br/>
+                Nous allons voir ici une programmation récursive de la recherche dichotomique.
+            </p>
+            <p>
+                Le principe de la recherche dichotomique consiste à comparer la valeur recherchée avec la valeur centrale de la liste afin d'éliminer la moitié des valeurs où ne peut pas se trouver la valeur recherchée.
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>Dans une liste de <mark class="code">n</mark> éléments, quel est l'indice de l'élément central ?</li>
+                    <li>Si la valeur recherchée est plus grande que la valeur centrale, quelle partie de la liste faut-il éliminer ?</li>
+                    <li>Quelle est la condition d'arrêt de la récursivité ?</li>
+                    <li>Ecrire la pile d'exécution lors de l'appel de : <br/> <mark class="code">recherche_dichotomique([12, 13, 15, 17, 21, 22, 22], 15)</mark></li>
+                    <li>Ecrire la pile d'exécution lors de l'appel de : <br/> <mark class="code">recherche_dichotomique([0, 1, 1, 2, 3, 5, 8, 13, 21], 7)</mark></li>
+                    <li>Programmer la recherche dichotomique de manière récursive.</li>
+                </ol>
+            </div>
+            <h3>Rendu du monnaie</h3>
+            <p>
+                En classe de première, nous avons vu un algorithme de rendu de monnaie.
+                Cet algorithme était dit <mark>glouton</mark> car il était basé sur des choix qui paraissaient optimaux à chaque étape, mais ne garantissait pas que le résultat global était optimal.
+                Une solution pour trouver le rendu optimal serai de déterminer toutes les solutions de rendu de monnaie possible.
+            </p>
+            <p>
+                Nous allons écrire un algorithme récursif qui permet de dresser cette liste.<br/>
+                On suppose que le montant à rendre et un nombre entier, tout comme le montant des pièces et des billets.<br/>
+                On suppose également que l'on dispose de toutes les pièces et billets en quantité illimitée.<br/>
+                La liste des pièces et billets disponibles est : <mark class="code">[500, 200, 100, 50, 20, 10, 5, 2, 1]</mark><br/>
+                Par la suite, on parlera uniquement de pièces pour simplifier les explications.
+            </p>
+            <p>
+                Le principe est le suivant :
+                <ul>
+                    <li>
+                        si le montant est supérieur ou égal à la valeur de la première pièce, alors deux choix s'offrent à moi :
+                        <ul>
+                            <li>j'utilise cette pièce et je cherche à rendre une montant plus petit avec les mêmes pièces disponibles.</li>
+                            <li>je n'utilise pas cette pièce et je cherche à rendre le même montant avec les autres pièces disponibles.</li>
+                        </ul>
+                    </li>
+                    <li>si le montant est inférieur à la valeur de la première pièce, alors je cherche à rendre le même montant avec les autres pièces disponibles.</li>
+                </ul>
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>Quelles sont les conditions d'arrêts ?</li>
+                    <li>Parmi les conditions d'arrêts, laquelle aboutit à un rendu de monnaie possible ?</li>
+                    <li>Ecrire la pile d'exécution pour rendre 6 euros avec la liste de pièces et de billets disponibles ci-dessus.</li>
+                    <li>Programmer de manière récursive le programme affichant les rendus de monnaie possible.</li>
+                </ol>
+            </div>
+            <h3>Suite de Fibonacci</h3>
+                <p>
+                    La suite de Fibonacci est définie par :
+                    <ul>
+                        <li>u<sub>0</sub> = 1</li>
+                        <li>u<sub>1</sub> = 1</li>
+                        <li>u<sub>n+2</sub> = u<sub>n+1</sub> + u<sub>n</sub>, pour tout entier naturel n</li>
+                    </ul>
+                </p>
+                <div class="exercice">
+                    <ol>
+                        <li>Programmer de manière récursive la fonction <mark class="code">fibo(n)</mark> donnant la valeur de u<sub>n</sub></li>
+                        <li>Ecrire la pile d'exécution lors de l'appel de <mark class="code">fibo(4)</mark></li>
+                    </ol>
+                </div>
+                <p>
+                    La récursivité sur la suite de Fibonacci pose vite des problèmes ! Le nombre d'appels récursifs devient vite impressionnant ! Cependant cette fonction peut être optimisée car beaucoup de ces appels sont identiques. Ces résultats pourraient être stockés lors du premier calcul pour être réutilisés lors de autres appels. Cela s'appelle la <mark>mémoïsation</mark> et cette nouvelle approche s'appelle <mark>programmation dynamique</mark>.
+                </p>
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        def fibo(n, M={}) : <br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"""M est un dictionnaire servant à la mémoïsation"""<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if n in M :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return M[n]<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if n == 0 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if n == 1 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;valeur = fibo(n-1, M) + fibo(n-2, M)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;M[n] = valeur<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return valeur
+                    </p>
+                </div>
+            <h3>Tour de Hanoï</h3>
+                <p>
+                    Les <a href="https://fr.wikipedia.org/wiki/Tours_de_Hano%C3%AF">Tours de Hanoï</a> sont un jeu de réflexion ou le but est de déplacer une tour formée de disque d'un pilier vers un autre en utilisant un troisième pilier intermédiaire. A tout moment, il est impossible de déposer un disque sur un disque de rayon plus petit.
+                    <img src="images/hanoi.jpg"/>
+                    <div class="exercice">
+                        <ol>
+                            <li>Avec combien de disque ce problème est-il évident ?</li>
+                            <li>Expliquer comment résoudre le problème à 3 disques en utilisant la résolution du problème à 2 disques et du problème à 1 disque.</li>
+                            <li>Expliquer comment résoudre le problème à 4 disques en utilisant la résolution du problème à 3 disques et du problème à 1 disque.</li>
+                            <li>
+                                Ecrire une fonction <mark class="code">hanoi(n, depart, arrive, intermediaire)</mark> affichant toutes les étapes pour résoudre le déplacement de <mark class="code">n</mark> disques du pilier <mark class="code">depart</mark> vers le pilier <mark class="code">arrive</mark> en utilisant le pilier <mark class="code">intermediaire</mark>.<br/>
+                                Les piliers sont des listes dont la première valeur est le nom du pilier puis les autres sont les entiers représentants les rayons des disques placées dans ce pilier.<br/>
+                                Pour résoudre le problème de la tour de Hanoï à 8 disques, nous appellerons <mark class="code">hanoi(8, ["A", 8, 7, 6, 5, 4, 3, 2, 1], ["C"], ["B"])</mark><br/>
+                                Vous pourrez utiliser la fonction <mark class="code">affichage_hanoi.py</mark> pour afficher les étapes intermédiaires.
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="algo">
+                        <input type="button" class="copier" value="📑" title="copier">
+                        <p class="code">
+                            def affichage_hanoi(tour1, tour2, tour3) :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;tours = sorted([tour1, tour2, tour3])<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;rayon_max = max(tour1[1:] + tour2[1:] + tour3[1:])<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;hauteur = len(tour1) + len(tour2) + len(tour3)<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;longueur = 6*rayon_max + 9<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;centres = [rayon_max+1, 3*rayon_max+4, 5*rayon_max+7]<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;G = [[" " for j in range(longueur)] for i in range(hauteur)]<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for j in range(longueur) :<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[0][j] = "▇"<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for t in range(3) :<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for i in range(hauteur) :<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[i][centres[t]] = "│"<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[0][centres[t]] = "▇"<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1, len(tours[t])) :<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for k in range(tours[t][i]+1) :<br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[i][centres[t]-k] = "▇"<br/>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;G[i][centres[t]+k] = "▇"<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("")<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for i in range(hauteur-1, -1, -1) :<br/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(''.join(G[i]))<br/>
+
+                        </p>
+                    </div>
+                </p>
+            <h2>Autres exercices</h2>
+            <ol>
+                <li><a href="miroir.html">miroir d'un mot</a></li>
+                <li><a href="syracuse.html">suite de Syracuse</a></li>
+                <li><a href="coefficientsBinomiaux.html">coefficients binomiaux</a></li>
+                <li><a href="permutations.html">liste des permutations (et anagrammes)</a></li>
+                <li><a href="jeuDame.html">jeu de la dame</a></li>
+            </ol>
+        </div>
+        <script type="text/javascript" src="../script.js"></script>
+    </body>
+</html>

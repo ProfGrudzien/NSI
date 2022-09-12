@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../style.css"/>
+        <link rel="stylesheet" href="Graphe.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Graphes</h1>
+            <p>
+                Des listes chaînées aux piles, files puis arbres, les structures de données sont de plus en plus complexes.
+                Ce cheminement nous mène maintenant aux graphes, une structure de données dite relationnelle car elle permet de modéliser des liens entre des entités.
+            </p>
+            <h2>Notion de graphe</h2>
+            <p>
+                Un graphe est un ensemble de sommets combiné à un ensemble d’arêtes liant ces sommets.
+                Il existe beaucoup de variantes, par exemple les graphes orientés où les arêtes ont un sens unique de parcours ou bien les graphes pondérés où les arêtes sont dotées d'un poids.
+            </p>
+            <p>
+                Exemples :
+                <ul>
+                    <li>
+                        <p>Graphe simple non orienté et non pondéré où les sommets sont nommés par des nombres entiers :</p>
+                        <img src="images/graphe00.png">
+                    </li>
+                    <li>
+                        <p>Graphe simple non orienté et non pondéré où les sommets sont nommés par des lettres :</p>
+                        <img src="images/graphe01.png">
+                    </li>
+                    <li>
+                        <p>Graphe orienté et non pondéré :</p>
+                        <img src="images/graphe02.png">
+                    </li>
+                    <li>
+                        <p>Graphe simple non orienté pondéré :</p>
+                        <img src="images/graphe03.png">
+                    </li>
+                    <li>
+                        <p>Graphe simple orienté et pondéré :</p>
+                        <img src="images/graphe04.png">
+                    </li>
+                </ul>
+            </p>
+            <h2>Problèmes faisant intervenir des graphes.</h2>
+            <h3>Les sept ponts de Königsberg</h3>
+            <p>
+                L'origine des graphes viendrait du mathématicien suisse Leonhard Euler, lors de la résolution du problème des sept ponts de Königsberg. Le problème s’énonce ainsi :<br/>
+                « Existe-t-il un itinéraire permettant de traverser une et une seule fois les 7 ponts de la ville de Königsberg dont voici une représentation.»
+                <img src="images/Konigsberg.png">
+                La résolution de ce problème est facilité par l'utilisation du graphe suivant :
+                <img src="images/Konigsberg_graphe.png">
+                Et la démonstration est la suivante :<br/>
+                Imaginons qu'il existe un tel parcours.
+                Pour chaque sommet autre que le premier et le dernier de parcours, il faut que l'on puisse en partir autant de fois qu'on est arrivé à ce sommet.
+                Donc le nombre de sommets ayant un nombre impair d’arêtes ne peux pas dépasser 2.
+                Sur ce graphe, tous les sommets ont un nombre impair d'arêtes.
+                Il n'existe donc pas de promenade parcourant ces ponts une et une seule fois.
+            </p>
+            <div class="exercice">
+                Est-il possible de dessiner ce dessin sans lever le crayon et sans repasser par un segment déjà tracé ?
+                <img src="images/graphe05.png">
+            </div>
+            <h3>Coloration des sommets d'un graphe</h3>
+            <p>
+                Le théorème des 4 couleurs affirme que pour n'importe quelle carte, il existe une façon de colorier chaque région avec 4 couleurs sans qu'aucunes régions adjacentes ne soit de la même couleur. Voilà une solution pour la carte présentant les états des USA :
+                <img src="images/USA.png">
+                La démonstration de ce théorème est très compliquée et fait intervenir plusieurs centaines de situations possibles.
+                Il s'agît de la première preuve réalisée par un ordinateur (en 1976 après 1200 heures de calcul).<br/>
+                Elle s'appuie sur un graphe ou les sommets sont les régions de la carte et où les arêtes relient les régions adjacentes.
+            </p>
+            <p>
+                Le problème de coloration consiste à déterminer le nombre de couleurs nécessaire (au minimum) pour colorier les sommets d'un graphe sans que deux sommets reliés par une arrête ne soient de la même couleur.
+            </p>
+            <div class="exercice">
+                Combien de couleur (au minimum) faut-il pour colorier le graphe suivant ?
+                <img src="images/graphe00.png"/>
+            </div>
+            <p>
+                Le problème de coloration permet de résoudre de nombreux problèmes comme par exemple des problèmes d'optimisation.
+            </p>
+            <div class="exercice">
+                Une société doit transporter par camions six produits chimiques, notés P1,&nbsp;...,&nbsp;P6, depuis l'usine de production jusqu'à l'entreprise utilisatrice. Pour des raisons de sécurité, certains produits ne peuvent pas être transportés ensemble&nbsp;: P1 et P2, P1 et P4, P2 et P3, P2 et P5, P3 et P4, P5 et P6.<br/> Déterminer le nombre minimum de camions nécessaires.
+            </div>
+            <div class="exercice">
+                A un examen, les candidats peuvent choisir 2 ou 3 options parmi les 6 options proposées : graphes, vélo, langue régionale, guitare, latin et natation. Certains élèves ont choisi les options graphes, langue régionale, guitare. D'autres vélo et latin; D'autres enfin langue régionale et natation. Les élèves passent au plus une épreuve chaque jour.
+                <ol>
+                    <li>Combien peut-on programmer d'épreuves d'option au maximum dans une journée ?</li>
+                    <li>Quelle est la durée minimum de l'ensemble des épreuves optionnelles ?</li>
+                </ol>
+            </div>
+            <h3>Un problème bidon</h3>
+            <p>
+                Dans le film Une journée en enfer, Les deux héros doivent résoudre un problème de logique afin de désamorcer une bombe.
+                Ils disposent d'une fontaine d'eau et de 2 bidons, l'un d'une capacité de 5 gallons et l'autre d'une capacité de 3 gallons.
+                Ils doivent remplir l'un des bidons d'eau par exactement 4 gallons d'eau.
+            </p>
+            <p>
+                Ce problème peut facilement être résolu à l'aide d'un graphe orienté :
+                Les sommets seront étiquetés de la forme (a, b) où a est le volume d'eau (en gallons) dans le gros bidon et b le volume d'eau dans le petit gallon. La situation initiale est (0, 0) et on souhaite obtenir une situation de la forme (4, x).
+                Les arrêtes signifient qu'il est possible de passer d'une situation à l'autre en réalisant une des actions suivantes :
+                <ul>
+                    <li>vider au sol le contenu du gros bidon</li>
+                    <li>vider au sol le contenu du petit bidon</li>
+                    <li>remplir au maximum le gros bidon à l'aide de la fontaine</li>
+                    <li>remplir au maximum le petit bidon à l'aide de la fontaine</li>
+                    <li>transvaser l'eau du petit bidon vers le gros bidon jusqu'à vider le petit bidon ou remplir le gros</li>
+                    <li>transvaser l'eau du gros bidon vers le petit bidon jusqu'à vider le gros bidon ou remplir le petit</li>
+                </ul>
+                <ol>
+                    <li>Construire le graphe permettant de résoudre ce problème</li>
+                    <li>En déduire les actions à mener pour résoudre ce problème</li>
+                </ol>
+            </p>
+            <h2>Distances dans un graphe</h2>
+            <h3>Dans un graphe non pondéré</h3>
+            <p>
+                La longueur d'un chemin dans un graphe non pondéré est égal au nombre d’arêtes traversées en parcourant ce chemin.<br/>
+                La distance entre deux sommets et égal à la plus petite longueur parmi tous les chemins reliant ces deux sommets.<br/>
+                Si deux sommets ne sont pas reliables, alors leur distance est égale à +&infin;.
+            </p>
+            <div class="exercice">
+                On considère le graphe suivant.
+                <img src="images/graphe01.png">
+                <ol>
+                   <li>Quelle est la distance séparant les sommets A et G ?</li> 
+                   <li>Quelle est la distance séparant les sommets A et H ?</li>
+                   <li>Quelle est la distance séparant les sommets E et D ?</li> 
+                </ol>
+            </div>
+            <p>
+                Attention, dans un graphe orienté, il n'est possible de parcourir les arêtes que dans un seul sens.
+                La distance d'un sommet A vers un sommet B peut alors être différente de la distance du sommet B vers le sommet A !
+            </p>
+            <div class="exercice">
+                On considère le graphe suivant.
+                <img src="images/graphe02.png">
+                <ol>
+                   <li>Quelle est la distance du sommet F vers le sommet D ?</li> 
+                   <li>Quelle est la distance du sommet D vers le sommet F ?</li> 
+                   <li>Quelle est la distance du sommet A vers le sommet E ?</li>
+                </ol>
+            </div>
+            <h3>Dans un graphe pondéré</h3>
+            <p>
+                La longueur d'un chemin dans un graphe pondéré est égal à la somme des poids de toutes les d’arêtes traversées en parcourant ce chemin.<br/>
+                La distance entre deux sommets et égal à la plus petite longueur parmi tous les chemins reliant ces deux sommets.<br/>
+                Si deux sommets ne sont pas reliables, alors leur distance est égale à +&infin;.
+            </p>
+            <div class="exercice">
+                On considère le graphe suivant.
+                <img src="images/graphe03.png">
+                <ol>
+                   <li>Quelle est la distance séparant les sommets A et E ?</li> 
+                   <li>Quelle est la distance séparant les sommets A et F ?</li>
+                   <li>Quelle est la distance séparant les sommets C et F ?</li> 
+                </ol>
+            </div>
+            <p>
+                Attention, dans un graphe orienté, il n'est possible de parcourir les arêtes que dans un seul sens.
+                La distance d'un sommet A vers un sommet B peut alors être différente de la distance du sommet B vers le sommet A !
+            </p>
+            <div class="exercice">
+                On considère le graphe suivant.
+                <img src="images/graphe04.png">
+                <ol>
+                   <li>Quelle est la distance du sommet 1 vers le sommet 4 ?</li> 
+                   <li>Quelle est la distance du sommet 1 vers le sommet 8 ?</li> 
+                   <li>Quelle est la distance du sommet 2 vers le sommet 5 ?</li>
+                   <li>Quelle est la distance du sommet 5 vers le sommet 2 ?</li>
+                </ol>
+            </div>
+            <h2>Parcours d'un graphe</h2>
+            <p>
+                Tout comme les arbres, les graphes peuvent être parcouru en utilisant les sommets voisins d'un sommets de départ.
+                Il y a 3 parcours possibles :
+                <ul>
+                    <li>en largeur</li>
+                    <li>en profondeur préfixe</li>
+                    <li>en profondeur postfixe</li>
+                </ul>
+            </p>
+            <h3>Parcours en largeur</h3>
+                <p>
+                    Il s'agît de parcourir en premier tous les voisins puis ensuite les voisins des voisins qui n'ont pas été traités en s'éloignant ainsi progressivement du sommet initial. Une file permet de réaliser facilement ce parcours. Exemple :<br/>
+                    On considère le graphe :
+                    <img src="images/graphe00.png">
+                    <ul>
+                        <li>Le parcours en largeur au départ du sommet 1 donne : 1 - 2 - 5 - 3 - 4 - 6</li>
+                        <li>Le parcours en largeur au départ du sommet 3 donne : 3 - 2 - 4 - 1 - 5 - 6</li>
+                    </ul>
+                </p>
+                <div class="exercice">
+                    On considère le graphe non orienté suivant :
+                    <img src="images/graphe01.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+                <div class="exercice">
+                    On considère le graphe orienté suivant :
+                    <img src="images/graphe02.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+                <p>
+                    Remarque : il arrive que tous les sommets d'un graphe ne soit pas atteignable lorsque l'on effectue un parcours de ce graphe en largeur (ou en profondeur).
+                </p>
+                <div class="exercice">
+                    On considère le graphe orienté suivant :
+                    <img src="images/graphe04.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de 1.</li>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de 4.</li>
+                    </ol>
+                </div>
+            <h3>Parcours en profondeur préfixe</h3>
+                <p>
+                    Il s'agît de parcourir un sommet avant de parcourir tous ses voisins qui n'ont pas été traités.
+                    Une pile ou une récurrence permet de réaliser facilement ce parcours. Exemple :<br/>
+                    On considère le graphe :
+                    <img src="images/graphe00.png">
+                    <ul>
+                        <li>Le parcours en profondeur préfixe au départ du sommet 1 donne : 1 - 2 - 3 - 4 - 5 - 6</li>
+                        <li>Le parcours en profondeur préfixe au départ du sommet 3 donne : 3 - 2 - 1 - 5 - 4 - 6</li>
+                    </ul>
+                </p>
+                <div class="exercice">
+                    On considère le graphe non orienté suivant :
+                    <img src="images/graphe01.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+                <div class="exercice">
+                    On considère le graphe orienté suivant :
+                    <img src="images/graphe02.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets obtenu par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+            <h3>Parcours en profondeur postfixe</h3>
+                <p>
+                    Il s'agît de parcourir un sommet <mark>après</mark> avoir parcouru tous ses voisins qui n'ont pas été traités.
+                    Une pile ou une récurrence permet de réaliser facilement ce parcours. Exemple :<br/>
+                    On considère le graphe :
+                    <img src="images/graphe00.png">
+                    <ul>
+                        <li>Le parcours en profondeur postfixe au départ du sommet 1 donne : 5 - 6 - 4 - 3 - 2 - 1</li>
+                        <li>Le parcours en profondeur postfixe au départ du sommet 3 donne : 6 - 4 - 5 - 1 - 2 - 3</li>
+                    </ul>
+                </p>
+                <div class="exercice">
+                    On considère le graphe non orienté suivant :
+                    <img src="images/graphe01.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets postfixe par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets postfixe par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+                <div class="exercice">
+                    On considère le graphe orienté suivant :
+                    <img src="images/graphe02.png">
+                    <ol>
+                        <li>Donner l'ordre des sommets postfixe par un parcours en largeur au départ de A.</li>
+                        <li>Donner l'ordre des sommets postfixe par un parcours en largeur au départ de E.</li>
+                    </ol>
+                </div>
+            <h2>Implémentations</h2>
+            <p>
+                Il y a plusieurs façons d'enregistrer les données qui représente le graphe.
+                Le choix de l'implémentation aura un impact direct sur la complexité en mémoire (volume des données stockées) ou en complexité temporel (nombre d'instruction nécessaire pour les parcours par exemple).
+                Dans tous les cas, nous partirons d'une classe <mark class="code">Sommet</mark> qui permet éventuellement d'ajouter deux sommets ayant le même nom au graphe.
+                Voilà le code de cette classe :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        class Sommet :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;def __init__(self, nom) :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.nom = nom<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;def __str__(self) :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return str(self.nom)<br/>
+                    </p>
+                </div>
+            </p>
+            <h3>Grâce à une liste de sommets et une liste d’arêtes</h3>
+            <p>
+                La méthode la plus proche de la définition d'un graphe : on utilise la liste des sommets et la liste des arêtes. Un sommet est un objet de classe <mark class="code">Sommet</mark>, une arrête est un tuple de deux éléments : le départ et l'arrivé (objets de classe <mark class="code">Sommet</mark>). Pour un graphe non orienté, nous stockerons une arrête par deux tuples, une dans chaque sens, ce qui augmentera le volume de données stockées mais simplifiera l'écriture de certains méthodes et le passage à une implémentation du graphe orienté.
+            </p>
+            <div class="exercice">
+                Donner la liste des sommets et des arrêtes pour la graphe suivant :
+                <img src="images/graphe00.png">
+            </div>
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Créer une classe graphe possédant deux attributs :
+                        <ul>
+                            <li><mark class="code">sommets</mark> : une liste qui contiendra les sommets (objets de classe <mark class="code">Sommet</mark>) de ce graphe</li>
+                            <li><mark class="code">aretes</mark> : une liste qui contiendra les arêtes de ce graphe (tuples de 2 éléments)</li>
+                        </ul>
+                        Au moment de créer le graphe, celui-ci sera vide.
+                    </li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_sommet</mark> qui permet d'ajouter un sommet au graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_arete</mark> qui permet d'ajouter une arête au graphe en donnant les deux sommets concernés.</li>
+                    <li>Ajouter une méthode <mark class="code">afficher</mark> qui affiche le noms de chaque sommet et toutes les arêtes. </li>
+                    <li>Ajouter une méthode <mark class="code">retirer_arete</mark> qui permet de retirer une des arêtes du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">retirer_sommet</mark> qui permet de retirer un sommet du graphe ainsi que toutes les arêtes concernées.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_sommets</mark> qui retourne la liste des sommets du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_successeurs</mark> qui retourne la liste des sommets du graphe directement atteignable d'un sommet initial donné en paramètre.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_predecesseurs</mark> qui retourne la liste des sommets du graphe à partir duquel un sommet initial donné en paramètre est directement atteignable.</li>
+                    <li>Ajouter une méthode <mark class="code">existe_arete</mark> qui retourne un booleen indiquant s'il est directement possible d'aller d'un sommet de départ à un autre. Ces deux sommets étant donnés en paramètre.</li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Modifier la classe précédente en une classe <mark class="code">GrapheOriente</mark>.
+            </div>
+            <h3>Grâce à la matrice d'adjacence</h3>
+            <p>
+                Les présence ou l'absence d'une arête est stockée dans un tableau à double entrée aussi appelé matrice.
+                Ce tableau a autant de ligne et de colonne que de sommets dans le graphe.
+                Nous utiliserons un <mark class="code">0</mark> pour l'absence d'arête et un <mark class="code">1</mark> pour la présence d'une arête reliant le sommet associé à la ligne au sommet associé à la colonne.
+            </p>
+            <div class="exercice">
+                Donner la matrice d'adjacence de ce graphe :
+                <img src="images/graphe00.png">
+            </div>
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Créer une classe graphe possédant deux attributs :
+                        <ul>
+                            <li><mark class="code">sommets</mark> : une liste qui contiendra les sommets (objets de classe <mark class="code">Sommet</mark>) de ce graphe</li>
+                            <li><mark class="code">matrice</mark> : une liste de listes contenant des 0 et des 1.</li>
+                        </ul>
+                        Au moment de créé le graphe, celui-ci sera vide.
+                    </li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_sommet</mark> qui permet d'ajouter un sommet au graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_arete</mark> qui permet d'ajouter une arête au graphe en donnant les deux sommets concernés.</li>
+                    <li>Ajouter une méthode <mark class="code">afficher</mark> qui affiche le noms de chaque sommet et la matrice d'adjacence. </li>
+                    <li>Ajouter une méthode <mark class="code">retirer_arete</mark> qui permet de retirer une des arêtes du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">retirer_sommet</mark> qui permet de retirer un sommet du graphe ainsi que toutes les arêtes concernées.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_sommets</mark> qui retourne la liste des sommets du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_successeurs</mark> qui retourne la liste des sommets du graphe directement atteignable d'un sommet initial donné en paramètre.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_predecesseurs</mark> qui retourne la liste des sommets du graphe à partir duquel un sommet initial donné en paramètre est directement atteignable.</li>
+                    <li>Ajouter une méthode <mark class="code">existe_arete</mark> qui retourne un booleen indiquant s'il est directement possible d'aller d'un sommet de départ à un autre. Ces deux sommets étant donnés en paramètre.</li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Modifier la classe précédente en une classe <mark class="code">GrapheOriente</mark>.
+            </div>
+            <h3>Grâce au dictionnaire des successeurs</h3>
+            <p>
+                Sont stockées dans un dictionnaire les listes des sommets directement atteignables en partant d'un sommet utilisé comme clé.
+            </p>
+            <div class="exercice">
+                Donner le dictionnaire des listes des successeurs pour le graphe suivant :
+                <img src="images/graphe00.png">
+            </div>
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Créer une classe graphe possédant un seul attribut :
+                        le dictionnaire stockant les listes des successeurs.
+                        Au moment de créé le graphe, celui-ci sera vide.
+                    </li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_sommet</mark> qui permet d'ajouter un sommet au graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">ajouter_arete</mark> qui permet d'ajouter une arête au graphe en donnant les deux sommets concernés.</li>
+                    <li>Ajouter une méthode <mark class="code">afficher</mark> qui affiche le noms de chaque sommet et la matrice d'adjacence. </li>
+                    <li>Ajouter une méthode <mark class="code">retirer_arete</mark> qui permet de retirer une des arêtes du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">retirer_sommet</mark> qui permet de retirer un sommet du graphe ainsi que toutes les arêtes concernées.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_sommets</mark> qui retourne la liste des sommets du graphe.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_successeurs</mark> qui retourne la liste des sommets du graphe directement atteignable d'un sommet initial donné en paramètre.</li>
+                    <li>Ajouter une méthode <mark class="code">liste_predecesseurs</mark> qui retourne la liste des sommets du graphe à partir duquel un sommet initial donné en paramètre est directement atteignable.</li>
+                    <li>Ajouter une méthode <mark class="code">existe_arete</mark> qui retourne un booleen indiquant s'il est directement possible d'aller d'un sommet de départ à un autre. Ces deux sommets étant donnés en paramètre.</li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Modifier la classe précédente en une classe <mark class="code">GrapheOriente</mark>.
+            </div>
+            <h3>Parcours d'un graphe en largeur</h3>
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">parcours_largeur</mark> qui retourne la liste des sommets obtenue grâce à un parcours en largeur. Cette fonction prend en paramètre un objet de classe <mark class="code">Graphe</mark> ou <mark class="code">GrapheOriente</mark> et utilise uniquement les méthodes communes à toutes les implémentations précédemment écrites.
+            </div>
+            <h3>Parcours d'un graphe en profondeur</h3>
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">parcours_profondeur_prefixe</mark> qui retourne la liste des sommets obtenue grâce à un parcours en profondeur prefixe. Cette fonction prend en paramètre un objet de classe <mark class="code">Graphe</mark> ou <mark class="code">GrapheOriente</mark> et utilise uniquement les méthodes communes à toutes les implémentations précédemment écrites.
+            </div>
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">parcours_profondeur_postfixe</mark> qui retourne la liste des sommets obtenue grâce à un parcours en profondeur postfixe. Cette fonction prend en paramètre un objet de classe <mark class="code">Graphe</mark> ou <mark class="code">GrapheOriente</mark> et utilise uniquement les méthodes communes à toutes les implémentations précédemment écrites.
+            </div>
+            <h2>Algorithmes de plus cours chemins</h2>
+            Dans cette algorithmes nous allons déterminer un des chemins les plus cours entre un sommet de départ et chaque sommet du graphe. Ces algorithmes sont basés sur des algorithmes de parcours de graphe.
+            <h3>Dans un graphe non pondéré</h3>
+            <p>
+                Le parcours en largeur est tout indiqué car il permet de ranger les sommets dans l'ordre croissante de leur distance avec le sommet choisi comme départ. L'algorithme est le suivant :
+                <div class="algo mono">
+                    Créer un dictionnaire vide et une file vide ;<br/>
+                    Dans le dictionnaire, associer au sommet initial la liste contenant uniquement ce sommet ;<br/>
+                    Enfiler le sommet initial ;<br/>
+                    Tant que la file n'est pas vide :<br/>
+                    &nbsp;&nbsp;Défiler un sommet ;<br/>
+                    &nbsp;&nbsp;Pour chaque successeurs de ce sommet :<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Si ce sommet n'a pas encore été découvert :<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dans le dictionnaire, associer au sommet initial la liste obtenu en ajoutant ce successeurs à la liste associée au sommet dépilé ;<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enfiler ce successeur ;
+                </div>
+                Pour déterminer efficacement si un sommet a déjà été découvert, on peut utiliser une coloration des sommets. Avant de se lancer dans le parcours, tous les sommets sont coloriés en rouge. Au moment où l'on atteint ce sommet, sa couleur passe au vert. Exemple :
+            </p>
+            <div class="cadre centrer">
+                <svg xml:lang="fr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 50 370 200">
+                    <line x1="20" y1="100" x2="20" y2="180" />
+                    <line x1="20" y1="100" x2="100" y2="100" />
+                    <line x1="20" y1="100" x2="100" y2="200" />
+                    <line x1="20" y1="180" x2="100" y2="200" />
+                    <line x1="100" y1="200" x2="100" y2="100" />
+                    <line x1="100" y1="200" x2="220" y2="200" />
+                    <line x1="100" y1="100" x2="220" y2="200" />
+                    <line x1="100" y1="100" x2="200" y2="100" />
+                    <line x1="220" y1="200" x2="200" y2="100" />
+                    <line x1="220" y1="200" x2="350" y2="150" />
+                    <line x1="200" y1="100" x2="350" y2="150" />
+                    <circle cx="20" cy="100" r="16" id="APCC"/>
+                    <text x="20" y="100">A</text>
+                    <circle cx="20" cy="180" r="16" id="BPCC"/>
+                    <text x="20" y="180">B</text>
+                    <circle cx="100" cy="100" r="16" id="CPCC"/>
+                    <text x="100" y="100">C</text>
+                    <circle cx="100" cy="200" r="16" id="DPCC"/>
+                    <text x="100" y="200">D</text>
+                    <circle cx="200" cy="100" r="16" id="EPCC"/>
+                    <text x="200" y="100">E</text>
+                    <circle cx="220" cy="200" r="16" id="FPCC"/>
+                    <text x="220" y="200">F</text>
+                    <circle cx="350" cy="150" r="16" id="GPCC"/>
+                    <text x="350" y="150">G</text>
+                </svg>
+                <input type="button" id="precedentPCC" value="précédent">
+                <input type="button" id="suivantPCC" value="suivant">
+                <input type="button" id="resetPCC" value="réinitialiser">
+                <p id="pPCC"></p>
+                <p class="mono">File : <span id="filePCC"></span></p>
+                <p class="mono">Sommet défilé : <span id="sommetPCC"></span></p>
+                <p class="mono">Dictionnaire :</p>
+                <div id="divPCC" class="mono"></div>
+            </div>
+            <h3>Dans un graphe pondéré</h3>
+            <p>
+                L'algorithme de Dijkstra permet de déterminer le chemin le plus cours dans un graphe pondéré par des poids positifs.
+                Il porte le nom de son inventeur, l'informaticien néerlandais Edsger Dijkstra, et a été publié en 1959.
+            </p>
+            <p>
+                Il est basé sur un parcours du graphe qui n'est ni un parcours en largeur, ni un parcours en profondeur.
+                A chaque étape, il faut sélectionner le sommet le plus proche du sommet initial parmi tous les successeurs des sommets déjà explorés.
+            </p>
+            <p>
+                Encore une fois, la coloration des sommets permet de savoir si un sommet a déjà été exploré.
+                Cet algorithme est souvent utilisé à l'aide d'un tableau, comme le présente l'exemple suivant :
+            </p>
+            <div class="cadre centrer">
+                <svg xml:lang="fr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 50 370 200">
+                    <line x1="20" y1="100" x2="20" y2="180" />
+                    <text x="20" y="140" dx="-10">4</text>
+                    <line x1="20" y1="100" x2="100" y2="100" />
+                    <text x="60" y="100" dy="-10">3</text>
+                    <line x1="20" y1="100" x2="100" y2="200" />
+                    <text x="60" y="150" dx="7" dy="-7">2</text>
+                    <line x1="20" y1="180" x2="100" y2="200" />
+                    <text x="60" y="190" dy="10">5</text>
+                    <line x1="100" y1="200" x2="100" y2="100" />
+                    <text x="100" y="150" dx="10">3</text>
+                    <line x1="100" y1="200" x2="220" y2="200" />
+                    <text x="160" y="200" dy="10">4</text>
+                    <line x1="100" y1="100" x2="220" y2="200" />
+                    <text x="160" y="150" dx="10" dy="-7">2</text>
+                    <line x1="100" y1="100" x2="200" y2="100" />
+                    <text x="150" y="100" dy="-10">4</text>
+                    <line x1="220" y1="200" x2="200" y2="100" />
+                    <text x="210" y="150" dx="10">5</text>
+                    <line x1="220" y1="200" x2="350" y2="150" />
+                    <text x="285" y="175" dy="10">4</text>
+                    <line x1="200" y1="100" x2="350" y2="150" />
+                    <text x="275" y="125" dy="-10">1</text>
+                    <circle cx="20" cy="100" r="16" id="ADijkstra"/>
+                    <text x="20" y="100">A</text>
+                    <circle cx="20" cy="180" r="16" id="BDijkstra"/>
+                    <text x="20" y="180">B</text>
+                    <circle cx="100" cy="100" r="16" id="CDijkstra"/>
+                    <text x="100" y="100">C</text>
+                    <circle cx="100" cy="200" r="16" id="DDijkstra"/>
+                    <text x="100" y="200" >D</text>
+                    <circle cx="200" cy="100" r="16" id="EDijkstra"/>
+                    <text x="200" y="100">E</text>
+                    <circle cx="220" cy="200" r="16" id="FDijkstra"/>
+                    <text x="220" y="200">F</text>
+                    <circle cx="350" cy="150" r="16" id="GDijkstra"/>
+                    <text x="350" y="150">G</text>
+                </svg>
+                <input type="button" id="precedentDijkstra" value="précédent">
+                <input type="button" id="suivantDijkstra" value="suivant">
+                <input type="button" id="resetDijkstra" value="réinitialiser">
+                <p id="pDijkstra"></p>
+                <div id="divDijkstra">
+                    <table>
+                        <tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr>
+                        <tr><td id="AA"></td><td id="AB"></td><td id="AC"></td><td id="AD"></td><td id="AE"></td><td id="AF"></td><td id="AG"></td></tr>
+                        <tr><td id="BA"></td><td id="BB"></td><td id="BC"></td><td id="BD"></td><td id="BE"></td><td id="BF"></td><td id="BG"></td></tr>
+                        <tr><td id="CA"></td><td id="CB"></td><td id="CC"></td><td id="CD"></td><td id="CE"></td><td id="CF"></td><td id="CG"></td></tr>
+                        <tr><td id="DA"></td><td id="DB"></td><td id="DC"></td><td id="DD"></td><td id="DE"></td><td id="DF"></td><td id="DG"></td></tr>
+                        <tr><td id="EA"></td><td id="EB"></td><td id="EC"></td><td id="ED"></td><td id="EE"></td><td id="EF"></td><td id="EG"></td></tr>
+                        <tr><td id="FA"></td><td id="FB"></td><td id="FC"></td><td id="FD"></td><td id="FE"></td><td id="FF"></td><td id="FG"></td></tr>
+                        <tr><td id="GA"></td><td id="GB"></td><td id="GC"></td><td id="GD"></td><td id="GE"></td><td id="GF"></td><td id="GG"></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="../script.js"></script>
+        <script type="text/javascript" src="Graphes.js"></script>
+    </body>
+</html>

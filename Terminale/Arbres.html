@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Arbres binaires</h1>
+            <p>
+                Les piles, les files et les listes sont des structures linéaires.
+                Les données y sont rangés selon un ordre précis.
+                Il existe cependant d'autres structures qui ne sont pas linéaires.
+                C'est le cas des graphes qui seront étudiés plus tard et en particulier des structures arborescentes : les arbres.
+            </p>
+            <h2>Notion d'arbre</h2>
+            <p>
+                Un arbre est un <mark>nœud</mark> possédant éventuellement un ou plusieurs <mark>enfants</mark> qui sont eux même des nœud possédant éventuellement un ou plusieurs enfants. Chaque nœud (sauf celui de départ) ne possédant qu'un seul nœud parent.
+                <img src="images/tree.gif">
+            </p>
+            <p>
+                Exemples :
+                <ul>
+                    <li>Les listes simplement chaînées sont des exemples d'arbre très simple où les nœuds (sauf le dernier) ne possède qu'un seul enfant.</li>
+                    <li>Les dossiers et les fichiers sur un disque dur forment un arbre.</li>
+                    <img src="images/repertoires.jpg">
+                </ul>
+            </p>
+            <div class="exercice">
+                Les situations suivantes peuvent-elles être modélisées par un arbre ?
+                <img src="images/carte_mentale.png">
+                <img src="images/net.png">
+                <img src="images/genealogie.png">
+                <img src="images/phylogenetique.png">
+                <img src="images/phone.jpg">
+                <img src="images/algorigrammes.png">
+            </div>
+            <p>
+                Vocabulaire :
+                <ul>
+                    <li>Un arbre est hiérarchisé, à partir du seul nœud qui n'a pas de parent : sa <mark>racine</mark>.</li>
+                    <li>Les nœuds qui n'ont pas d'enfants sont des <mark>feuilles</mark>.</li>
+                    <li>Les chemins partant de la racine à l'une des feuilles est un <mark>branches</mark>.</li>
+                    <li>La <mark>taille</mark> d'un arbre est égal au nombre de nœuds (racine et feuilles comprises).</li>
+                    <li>La <mark>hauteur</mark> d'un arbre est égale à la longueur de la plus grande branche.</li>
+                </ul>
+            </p>
+            <div class="exercice">
+                On considère l'arbre suivant :
+                <img src="images/exo1.png">
+                <ol>
+                    <li>Quelle est la racine de cet arbre ?</li>
+                    <li>Quelles sont les feuilles de cet arbre ?</li>
+                    <li>Quelles est la hauteur de cet arbre ?</li>
+                    <li>Quelles est la taille de cet arbre ?</li>
+                </ol>
+            </div>
+            <h2>Arbres binaires</h2>
+            <p>
+                Nous allons maintenant nous concentrer sur les <mark>arbres binaires</mark> : un arbre dont les nœuds ont uniquement 0, 1 ou 2 enfants. On appelle alors ces enfants <mark>fils droit</mark> et <mark>fils gauche</mark> ou encore <mark>sous arbre droit</mark> et <mark>sous arbre gauche</mark>.
+                <img src="images/sousarbre.png">
+            </p>
+            <div class="exercice">
+                On considère l'arbre binaire suivant :
+                <img src="images/exo2.png">
+                <ol>
+                    <li>Quelle est la racine de cet arbre ?</li>
+                    <li>Quelles sont les feuilles de cet arbre ?</li>
+                    <li>Quelles est la hauteur de cet arbre ?</li>
+                    <li>Quelles est la taille de cet arbre ?</li>
+                    <li>Quel est le sous arbre droit du nœud B ?</li>
+                    <li>Quel est le sous arbre gauche du nœud I ?</li>
+                    <li>Quel est le sous arbre gauche du nœud G ?</li>
+                </ol>
+            </div>
+            <h2>Parcours d'un arbre binaire</h2>
+            <h3>Parcours en largeur</h3>
+            Il y a plusieurs façons de parcourir un arbre. Le premier présenté ici est le parcours en largeur qui passe par chaque nœud niveau après niveau.
+            <img src='images/p_largeur.png'>
+            Il est très facile de parcourir un arbre en largeur grâce à une file :
+            <div class="algo">
+                <input type="button" class="copier" value="📑" title="copier">
+                <p class="code">
+                    créer une file vide<br/>
+                    y enfiler la racine<br/>
+                    tant que la file n'est pas vide :<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;défiler un nœud<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;réaliser le traitement voulu sur ce nœud<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;enfiler le fils gauche et le fils droit de ce nœud à la file<br/>
+                </p>
+            </div>
+            <h3>Parcours en profondeur</h3>
+            En remplaçant la file par une pile, on explore l'arbre branche par branche.
+            On parle alors de parcours en profondeur.
+            <img src='images/p_profondeur.png'>
+            <div class="algo">
+                <input type="button" class="copier" value="📑" title="copier">
+                <p class="code">
+                    créer une pile vide<br/>
+                    y empiler la racine<br/>
+                    tant que la pile n'est pas vide :<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;dépiler un nœud<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;réaliser le traitement voulu sur ce nœud<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;empiler le fils droit et le fils gauche de ce nœud à la pile<br/>
+                </p>
+            </div>
+            Cependant, lors du parcours en profondeur, on peut choisir de traiter un nœud :
+            <ul>
+                <li>avant ces enfants, on parle de parcours <mark>préfixe</mark> ;</li>
+                <li>après le fils gauche mais avant le fils droit, on parle de parcours <mark>infixe</mark> ;</li>
+                <li>après ces enfants, on parle de parcours <mark>postfixe</mark>.</li>
+            </ul>
+            <div class='exercice'>
+                <ol>
+                    <li>En réalisant un parcours en profondeur grâce à une pile comme vue ci-dessus, quel type de parcours réalise-t-on ?</li>
+                    <li>En réalisant un parcours en profondeur préfixe du graphe suivant, quel est l'ordre de traitement des nœuds ?</li>
+                    <li>En réalisant un parcours en profondeur postfixe du graphe suivant, quel est l'ordre de traitement des nœuds ?</li>
+                    <li>En réalisant un parcours en profondeur infixe du graphe suivant, quel est l'ordre de traitement des nœuds ?</li>
+                </ol>
+                <img src='images/exo2.png'>
+            </div>
+            On peut parcourir en profondeur un arbre grâce à une récursivité.
+            <div class='exercice'>
+                Associer à chaque algorithme précédent les adjectifs <mark class='code'>infixe</mark>, <mark class='code'>préfixe</mark> et <mark class='code'>postfixe</mark>.
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        fonction parcours(nœud)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;réaliser le traitement désiré sur le nœud<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils gauche<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils droit<br/>
+                    </p>
+                </div>
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        fonction parcours(nœud)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils gauche<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils droit<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;réaliser le traitement désiré sur le nœud<br/>
+                    </p>
+                </div>
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        fonction parcours(nœud)<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils gauche<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;réaliser le traitement désiré sur le nœud<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;appeler la fonction parcours sur le fils droit<br/>
+                    </p>
+                </div>
+            </div>
+            <h2>Implémentations</h2>
+            <h3>Grâce à un tableau ou à un dictionnaire</h3>
+            On peut représenter les informations de chaque nœud dans un tableau.<br/>
+            Exemple :
+            <img src='images/exo3.png'>
+            <table class='etroite'>
+                <tr><th>id_nœud</th><th>valeur</th><th>fils_gauche</th><th>fils_droit</th></tr>
+                <tr><td>0</td><td>"r"</td><td>1</td><td>2</td></tr>
+                <tr><td>1</td><td>"a"</td><td>None</td><td>None</td></tr>
+                <tr><td>2</td><td>"b"</td><td>None</td><td>3</td></tr>
+                <tr><td>3</td><td>"d"</td><td>None</td><td>None</td></tr>
+            </table>
+            <div class='exercice'>
+                Donner un tableau représentant l'arbre suivant :
+                <img src='images/exo5.jpg'>
+            </div>
+            Ce tableau peut alors être implémenté par un dictionnaire ayant pour clés les identifiants des nœuds (qui peuvent alors être de n'importe quel type). Pour notre exemple :
+            <div class="algo">
+                <input type="button" class="copier" value="📑" title="copier">
+                <p class="code">
+                    arbre = {}<br/>
+                    arbre[0] = ["r", 1, 2]<br/>
+                    arbre[1] = ["a", None, None]<br/>
+                    arbre[2] = ["b", None, 3]<br/>
+                    arbre[3] = ["d", None, None]
+                </p>
+            </div>
+            <div class='exercice'>
+                Dessiner l'arbre défini par :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        arbre = {}<br/>
+                        arbre["o"] = ["o", None, "m1"]<br/>
+                        arbre["m1"] = ["m", None, None]<br/>
+                        arbre["p"] = ["p", "o", "m2"]<br/>
+                        arbre["e"] = ["e", None, None]<br/>
+                        arbre["m2"] = ["m", "e", "s"]<br/>
+                        arbre["s"] = ["s", None, None]
+                    </p>
+                </div>
+            </div>
+            Ou bien, lorsque les identifiants sont des entiers consécutifs comme c'est le cas pour notre exemple, on peut utiliser une liste ou l'index de chaque élément sert d'identifiant :
+            <div class="algo">
+                <input type="button" class="copier" value="📑" title="copier">
+                <p class="code">
+                    arbre = [["r", 1, 2],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["a", None, None],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["b", None, 3],<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["d", None, None]]
+                </p>
+            </div>
+            <div class='exercice'>
+                Dessiner l'arbre défini par :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        arbre = [["e", None, None],<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["i", None, None],<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["o", 1, None],<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["p", 2, 4],<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["r", 0, 5],<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;["s", None, None]]
+                    </p>
+                </div>
+            </div>
+            <h3>Grâce à des listes imbriquées</h3>
+            On peut pousser la structure précédente un peu plus loin.
+            Comme les identifiants sont utilisés qu'une seule fois pour identifier un fils, on peut remplacer cet identifiant par la liste représentant l'arbre directement. Toujours pour l'arbre précédent, cela donnerai les listes imbriquées :
+            <div class="algo">
+                <input type="button" class="copier" value="📑" title="copier">
+                <p class="code">
+                    arbre = ["r", ["a", None, None], ["b", None, ["d", None, None]]
+                </p>
+            </div>
+            <div class='exercice'>
+                Dessiner l'arbre défini par :
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        arbre = ["c", ["e", ["i", None, None], ["s", None, None]], ["r", None, ["e", ["s", None, None], None]]]
+                    </p>
+                </div>
+            </div>
+            <div class='exercice'>
+                Donner la liste imbriquée représentant l'arbre suivant :
+                <img src='images/exo6.png'>
+            </div>
+            <h3>Grâce à la programmation orienté objet</h3>
+            Un arbre est simplement définit par 3 éléments : sa valeur, son fils gauche et son fils droit.
+            On peut donc utiliser un objet <mark class="code">Arbre</mark> définit par 3 attributs : la valeur (le type dépend des informations à stocker dans l'arbre) et les deux fils (droit et gauche) eux mêmes de type <mark class="code">Arbre</mark>.
+            Pour enregistrer un arbre en mémoire, on peut alors :
+            <ul>
+                <li>
+                    Ecrire une longue instruction détaillant les fils de chaque nœud. Exemple :
+                    <div class="algo">
+                        <input type="button" class="copier" value="📑" title="copier">
+                        <p class="code">
+                            arbre = Arbre(1, Arbre(2, None, None), Arbre(3, Arbre(4, None, None), Arbre(5, None, None)))
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    Commencer par définir la racine puis ajouter les fils par une suite d'instruction. Exemple :
+                    <div class="algo">
+                        <input type="button" class="copier" value="📑" title="copier">
+                        <p class="code">
+                            arbre = Arbre(6, None, None)<br/>
+                            arbre.fils_gauche = Arbre(10, None, None)<br/>
+                            arbre.fils_droit&nbsp; = Arbre(7, None, None)<br/>
+                            arbre.fils_droit.fils_gauche = Arbre(9, None, None)<br/>
+                            arbre.fils_droit.fils_droit&nbsp; = Arbre(8, None, None)
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    Commencer par le niveau le plus bas puis remonter jusqu'à la racine. Exemple :
+                    <div class="algo">
+                        <input type="button" class="copier" value="📑" title="copier">
+                        <p class="code">
+                            A = Arbre(15, None, None)<br/>
+                            B = Arbre(14, None, None)<br/>
+                            C = Arbre(13, None, None)<br/>
+                            D = Arbre(12, A, B)<br/>
+                            arbre = Arbre(11, C, D)
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            <div class='exercice'>
+                Dessiner les arbres définis dans les trois exemples précédents.
+            </div>
+            <div class='exercice'>
+                <ol>
+                    <li>Créer une classe <mark class="code">Arbre</mark> possédant les trois attributs :
+                        <ul>
+                            <li><mark class="code">valeur</mark></li>
+                            <li><mark class="code">fils_gauche</mark></li>
+                            <li><mark class="code">fils_droit</mark></li>
+                        </ul>
+                    </li>
+                    <li>
+                        Utiliser cette classe pour enregistrer l'arbre suivant dans une variable <mark class='code'>A</mark>.
+                        <img src='images/exo4.png'>
+                    </li>
+                    <li>
+                        Ajouter une méthode <mark class='code'>parcours_largeur()</mark> affichant la valeur des nœuds de l'arbre selon un parcours en largeur.
+                    </li>
+                    <li>
+                        Ajouter une méthode <mark class='code'>parcours_prefixe()</mark> affichant la valeur des nœuds de l'arbre selon un parcours en profondeur prefixe.
+                    </li>
+                    <li>
+                        Ajouter une méthode <mark class='code'>parcours_infixe()</mark> affichant la valeur des nœuds de l'arbre selon un parcours en profondeur infixe.
+                    </li>
+                    <li>
+                        Ajouter une méthode <mark class='code'>parcours_postfixe()</mark> affichant la valeur des nœuds de l'arbre selon un parcours en profondeur postfixe.
+                    </li>
+                </ol>
+            </div>
+            <h2>Premières applications</h2>
+            <h3>Arbre de jeu</h3>
+            <p>
+                Les arbres permettent de représenter toutes les positions possibles au cours d'un jeu.
+                Cet arbre n'est en général pas binaire car un nœud a autant de fils qu'il y a de coups possibles.
+            </p>
+            <p>
+                Au jeu du morpion par exemple, la racine a 9 fils car le premier joueur peut placer son symbole dans l'une des 9 cases disponibles.
+                Ces 9 nœuds ont eu même 8 fils car le joueur suivant peut placer son symbole sur une des 8 cases encore libre.
+            </p>
+            <div class="exercice">
+                <img src="images/puissance4.png">
+                <ol>
+                    <li>Au jeu de puissance 4, combien de fils ont la plupart des nœuds de l'arbre représentant toutes les positions ?</li>
+                    <li>Dans quelle situation ce n'est pas le cas ?</li>
+                    <li>Quelles positions traduisent les feuilles de cet arbre ?</li>
+                    <li>Quel est la hauteur de cet arbre de jeu ?</li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <p>
+                    On propose ici d'étudier un arbre de jeu dans une situation où les joueurs n'ont qu'au maximum 2 choix.
+                    Il s'agît d'une variante du jeu de Nim.
+                </p>
+                <p>
+                    Voici les règles du jeu :<br/>
+                    On place sur une table 5 allumettes. A tour de rôle, les joueurs ont le choix de retirer soit 1 seule, soit 2 allumettes.
+                    Le joueur qui retire la dernière allumette a gagné.
+                </p>
+                <p>
+                    Dans ce jeu, une position est défini par 2 choses : le nombre d'allumettes restantes et le nom du prochain joueur.<br/>
+                    Comme le nom du joueur peut se déterminer aussi en regardant à quel niveau se situe le nœud correspondant à cette situation, il faut uniquement stocker le nombre d'allumettes restantes.
+                </p>
+                <p>
+                    L'arbre de jeu est binaire. On choisit que le fils gauche représente la situation où le joueur retire une seule allumette et que le fils droit représente la situation où le joueur retire deux allumettes. Les feuilles correspondent au cas où il n'y a plus aucune allumettes restantes.
+                </p>
+                <ol>
+                    <li>Quelle est la hauteur de cet arbre de jeu ?</li>
+                    <li>Dessiner l'arbre de ce jeu.</li>
+                    <li>On donne la couleur rouge au joueur qui commence, la couleur bleu à l'autre joueur.
+                        Montrer que le joueur rouge peut toujours gagner, quelque-soit les coups du joueur bleu.
+                    </li>
+                    <li>Ecrire une fonction <mark class='code'>arbre_jeu_variante_nim(n)</mark> qui construit l'arbre pour une partie commençant avec <mark class="code">n</mark> allumettes.</li>
+                </ol>
+            </div>
+            <h3>Code Morse</h3>
+            <div class="exercice">
+                Le code Morse traduit l'alphabet en points et en ligne facilement communicable grâce à divers moyens de transmission (lumière, son, impulsion électrique, ...).
+                Les lettres sont séparées par une pause, les mots par une longue pause.<br/>
+                Voilà le dictionnaire donnant les symboles pour toutes les lettres de l'alphabet.
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        dict_morse = {<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'A':'·−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'B':'−···',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'C':'−·−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'D':'−··',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'E':'·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'F':'··−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'G':'−−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'H':'····',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'I':'··',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'J':'·−−−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'K':'−·−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'L':'·−··',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'M':'−−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'N':'−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'O':'−−−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'P':'·−−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'Q':'−−·−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'R':'·−·',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'S':'···',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'T':'−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'U':'··−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'V':'···−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'W':'·−−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'X':'−··−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'Y':'−·−−',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'Z':'−−··',<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;' ':''<br/>
+                        }
+                    </p>
+                </div>
+                <ol>
+                    <li>Ecrire une fonction <mark class="code">encoder_morse(texte)</mark> traduisant un <mark class='code'>texte</mark> en lettres vers un texte en morse.<br/>Il n'y a pas besoin d'arbre pour cette question.</li>
+                    <li>
+                        Pour décoder facilement un message en morse, on utilise un arbre où les fils gauches correspondent à l'ajout d'un point, et les fils droits à l'ajout d'un tiret. Les nœuds ont pour valeur la lettre à utiliser lorsque l'on a finit de parcourir la lettre en morse.<br/> Comme les lettres sont codés par au maximum 4 symboles, la hauteur de l'arbre est égale à 4
+                        <ol>
+                            <li>Ecrire une fonction <mark class="code">arbre_morse(dict_morse)</mark> qui construit cet arbre à partir du dictionnaire précédent.</li>
+                            <li>Ecrire une fonction <mark class='code'>decoder_lettre_morse(morse)</mark> qui décode la lettre <mark class='code'>morse</mark> donnée en morse.</li>
+                            <li>Ecrire une fonction <mark class='code'>decoder_morse(morse)</mark> qui décode en lettres le texte <mark class='code'>morse</mark> donné en morse.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            <h3>Arbre et expression mathématiques</h3>
+            Les opérations +, &minus;, &times; et &div; sont des opérations binaires : elle s'effectuent sur deux nombres (ou expression).<br/>
+            On peut donc facilement représenter les expressions mathématiques construites sur ces 4 opérations à l'aide d'un arbre où les nœuds sont des opérateurs sauf les feuilles qui sont des nombres. Exemple :
+            <img src='images/arbre_maths.png'>
+            <div class="exercice">
+                <ol>
+                    <li>Représenter par un arbre l'expression (4 + 2) &times; (9 &minus; (1 + 3))</li>
+                    <li>
+                        Quelle expression mathématique représente l'arbre suivant ?
+                        <img src="images/arbre_maths.gif">
+                    </li>
+                    <li>Stocker dans une variable l'arbre de la question précédente.</li>
+                    <li>
+                        Afficher les nœuds selon un parcours en profondeur préfixe.<br/>
+                        On parle de notation polonaise (proposée en 1924 par le mathématicien polonais Jan Łukasiewicz).<br/>
+                        Les opérations sont vues comme des fonctions à deux variables.
+                    </li>
+                    <li>
+                        Afficher les nœuds selon un parcours en profondeur postfixe.<br/>
+                        On parle de notation polonaise inverse.<br/>
+                        En plaçant ces nœuds dans une pile, il est très facile d'écrire un programme calculant les expressions mathématiques.
+                    </li>
+                    <li>
+                        Afficher les nœuds selon un parcours en profondeur infixe en ajoutant en plus :
+                        <ul>
+                            <li>une parenthèse ouvrante avant d'afficher le fils gauche</li>
+                            <li>une parenthèse fermante après avoir affiché le fils droit</li>
+                        </ul>
+                    </li>
+                </ol>
+                Remarque : on peut aussi ajouter plus d'opérations comme la puissance (binaire) ou comme sin et cos (unaire : les nœuds n'auront qu'un seul fils).
+            </div>
+            <h2>Arbre binaire de recherche</h2>
+            <h3>Définition</h3>
+            <p>
+                Un arbre binaire de recherche (BST pour Binary Search Tree) est un arbre binaire possédant les propriétés suivantes :
+                <ul>
+                    <li>pour chaque nœud, tous les nœuds du sous-arbre gauche (s'il existe) ont une valeur plus petite ou égale à la valeur de ce nœud.</li>
+                    <li>pour chaque nœud, tous les nœuds du sous-arbre droit (s'il existe) ont une valeur strictement supérieure à la valeur de ce nœud.</li>
+                </ul>
+            </p>
+            <div class="exercice">
+                Les arbres suivants sont-ils des arbres binaires de recherche ?
+                <img src="images/bst1.png">
+                <img src="images/bst3.png">
+                <img src="images/bst2.png">
+                <img src="images/bst4.png">
+            </div>
+            <p>
+                L'insertion d'un nouveau nœud et la recherche d'une valeur dans cet arbre sont en complexité <mark class="code">O(h)</mark> où <mark class="code">h</mark> est la hauteur de l'arbre de recherche. Cela signifie que dans le cas idéal, cette complexité est <mark class="code">O(log(n))</mark> où <mark class="code">n</mark> est égal au nombre de nœuds. En revanche, dans le pire des cas, lorsque l'arbre est dégénéré, cette complexité est de <mark class="code">O(n)</mark>.
+            </p>
+            <div class="exercice">
+                Dans chaque cas, construire arbre à partir d'une liste de valeurs (en respectant l'ordre) puis déterminer le nombre maximal de comparaisons nécessaires pour constater qu'une valeur n'est pas présente dans l'arbre.
+                <ol>
+                    <li><mark class="code">[29, 31, 5, 17, 19, 7, 2, 13, 3, 37, 23, 11]</mark></li>
+                    <li><mark class="code">[31, 37, 23, 17, 29, 19, 11, 5, 13, 3, 7, 2]</mark></li>
+                    <li><mark class="code">[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37]</mark></li>
+                </ol>
+            </div>
+            <h3>Implémentation</h3>
+            <p>
+                Nous allons partir de l'implémentation d'un arbre binaire et nous la compléter en une implémentation d'un arbre binaire de recherche.
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>Copier la classe arbre déjà écrite en une classe <mark class="code">Arbre_recherche</mark></li>
+                    <li>Ajouter à cette classe la méthode <mark class="code">hauteur()</mark> qui retourne la hauteur de l'arbre.
+                        Par convention, la hauteur d'un arbre réduit à sa racine sera égale à <mark class="code">1</mark> et la hauteur d'un arbre vide sera égale à <mark class="code">0</mark>.</li>
+                    <li>Ajouter une méthode <mark class="code">inserer(valeur)</mark> qui insère une nouvelle valeur dans l'arbre binaire de recherche.</li>
+                    <li>Ajouter une méthode <mark class="code">rechercher(valeur)</mark> qui recherche si la valeur est présente dans l'arbre. Cette méthode retourne <mark class="code">True</mark> si c'est le cas, <mark class="code">False</mark> sinon.</li>
+                    <li>Reprendre les données de l'exercice précédent pour construire les trois arbres binaires de recherche puis afficher leurs hauteurs.</li>
+                </ol>
+            </div>
+            <h3>Application : tri par arbre</h3>
+            <div class="exercice">
+                <ol>
+                    <li>L'un des 4 parcours possibles d'un arbre binaire de recherche retourne les valeurs rangées dans l'ordre croissant. Lequel ?</li>
+                    <li>Ecrire une fonction <mark class="code">tri_par_arbre(liste)</mark> qui trie la <mark class="code">liste</mark> à l'aide d'un arbre binaire de recherche.</li>
+                </ol>
+            </div>
+            <h3>Application : GPS</h3>
+            Le but de cette activité est de rechercher le nom d'une commune et les données associées à l'aide d'un arbre binaire de recherche. La recherche se fait lettre après lettre. Si les communes commençant par les lettres données sont peu nombreuses (moins de 10), les données s'affichent à l'écran, terminant ainsi la recherche.
+            <div class="exercice">
+                <ol>
+                    <li>Copier la classe <mark class="code">Arbre_recherche</mark> déjà écrite en une classe <mark class="code">Arbre_GPS</mark></li>
+                    <li>Modifier cette nouvelle classe pour que les nœuds stockent deux informations en plus des fils droit et gauche : la clé de recherche (chaîne de caractère) et les données de la commune (au choix : tuple, liste, dictionnaire ou objet). La clé utilisé ici sera le nom de la commune.</li>
+                    <li>Modifier la méthode <mark class="code">inserer(valeur)</mark> en une méthode <mark class="code">inserer(commune)</mark> qui insére les informations de la commune dans cet arbre.</li>
+                    <li>Modifier la méthode <mark class="code">recherche(valeur)</mark> en une méthode <mark class="code">rechercher(commune)</mark> pour que la recherche se fasse à l'aide de la clé.</li>
+                    <li>A l'aide du fichier <mark class="code">communes.csv</mark>, créer l'arbre qui servira pour les recherches.</li>
+                </ol>
+            </div>
+        </div>
+        <script type="text/javascript" src="../script.js"></script>
+    </body>
+</html>

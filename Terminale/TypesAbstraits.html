@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Types abstraits</h1>
+            <h2>Les types abstraits</h2>
+            <p>
+                Les langages de programmation utilisent quelques types primitifs :
+                <ul>
+                    <li>les nombres entiers</li>
+                    <li>les nombres flottants</li>
+                    <li>les booléens</li>
+                    <li>les chaînes de caractères</li>
+                </ul>
+                Les autres types (tuples, listes, dictionnaires, ...) sont des types plus élaborés.
+            </p>
+            <p>
+                Selon les situations, on a besoin de ces types élaborés. Leur implémentation peut être prévu ou non dans le langage de programmation utilisé. Si ce n'est pas le cas, on peut programmer un moyen pour les utiliser. L'utilisation ne dépend donc pas de la façon dont ils sont implémentés du moment que ces implémentations proposent tous les outils nécessaire au non fonctionnement de ces types élaborés. On parle alors de types abstraits.
+            </p>
+            <p>
+                Cette année, nous étudierons 4 familles de types abstraits :
+                <ul>
+                    <li>les structures linéaires : les piles, les files, les listes</li>
+                    <li>les structures à accès par clé : les dictionnaires</li>
+                    <li>les structures hiérarchiques : les arbres</li>
+                    <li>les structures relationnelles : les graphes</li>
+                </ul>
+            </p>
+            <h2>Les piles</h2>
+            <p>
+                Lorsque nous avons étudié les fonctions récursives nous avons parlé de pile d'exécution.<br/>
+                Il est donc maintenant temps de définir plus en détail la notion de pile.
+            </p>
+            <h3>Les besoins</h3>
+            <p>
+                Nous avons besoin d'une structure stockant les appels de la fonction récursive en attente de résultat.
+                De part la récursivité, le résultat de la fonction ajoutée en dernier à la pile permet de trouver le résultat de la précédente.
+                Dans une structure en pile, on a donc besoin d'accéder au dernier élément stocké. Le nom a été choisit car il fait le parallèles avec une pile d'assiettes par exemple (en supposant qu'on ne puisse prendre les assiettes qu'une par une).
+                Bien entendu, une liste (au sens de python) peut convenir pour représenter une pile d'appels récursif, mais le type liste de python permet beaucoup plus de choses que ce dont on a besoin. Voici les seuls outils nécessaires :
+                <ul>
+                    <li>créer une pile vide</li>
+                    <li>déterminer si une pile est vide</li>
+                    <li>empiler une valeur à la pile (l'ajouter en haut de pile)</li>
+                    <li>dépiler une valeur à la pile (lire puis retirer la valeur en haut de pile)</li>
+                </ul>
+                En anglais, on parle de <mark>stack</mark> ou de structure <mark>LIFO</mark> : "Last In = First Out" c'est-à-dire « dernier entré = premier sorti ».
+            </p>
+            <div class="exercice">
+                Décrire le contenu des variables <mark class="code">P</mark> et <mark class="code">v</mark> à la fin de ces instructions :
+                <ol>
+                    <li>P = nouvelle pile vide</li>
+                    <li>empiler 3 à P</li>
+                    <li>empiler 2 à P</li>
+                    <li>v = dépiler P</li>
+                    <li>empiler 5 à P</li>
+                    <li>empiler 7 à P</li>
+                    <li>empiler 9 à P</li>
+                </ol>
+            </div>
+            <p>
+                L'exercice précédent montre bien qu'il n'est pas nécessaire de connaître la façon dont est implémenté la pile pour pouvoir l'utiliser. Seul compte la syntaxe pour appeler les différents outils. Pour la suite, nous utiliserons la syntaxe de la Programmation Orienté Objet : <mark class="code">P = Pile()</mark> ; <mark class="code">P.est_vide()</mark> ; <mark class="code">P.empiler(valeur)</mark> ; <mark class="code">P.depiler()</mark>
+            </p>
+            <h3>Implémentation</h3>
+            <div class="exercice">
+                A l'aide du type <mark class="code">list</mark> de Python, proposer l'implémentation d'un objet modélisant une pile.
+            </div>
+            <div class="exercice">
+                On peut aussi utiliser le principe de la récursivité.<br/>
+                Une pile non vide peut être vue comme un couple : la valeur au sommet et une autre pile contenant toutes les autres valeurs.<br/>
+                Proposer une implémentation d'un objet modélisant une pile sans utiliser le type <mark class="code">list</mark> de Python.
+            </div>
+            <h3>Applications</h3>
+            Pour tous les exercices suivants, vous importerez une des deux implémentations d'une pile.
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">min_pile(P)</mark> qui retourne la plus petite valeur contenue dans la pile <mark class="code">P</mark>.<br/>
+                Attention, à la fin de cette fonction, la pile <mark class="code">P</mark> doit avoir retrouvé son état initial.<br/>
+                Pour cela, on peut utiliser une seconde pile <mark class="code">Q</mark>.
+            </div>
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">copie_pile(P)</mark> qui retourne une copie de la pile <mark class="code">P</mark>, c'est-à-dire une pile contenant les mêmes valeurs que la pile <mark class="code">P</mark>.<br/>
+                Attention, à la fin de cette fonction, la pile <mark class="code">P</mark> doit avoir retrouvé son état initial.
+            </div>
+            <div class="exercice">
+                Lorsque l'on tape une expression mathématique dans des logiciels adaptés, un premier contrôle de la syntaxe est réalisé sur les parenthèses et les crochets : 
+                <ul>
+                    <li>on ne peut pas fermer une parenthèses ou un crochet s'il ne correspond pas à une parenthèses ou un crochet ouvert.</li>
+                    <li>dans l'expression mathématique, il doit y avoir autant de parenthèses ouvrantes que de parenthèses fermantes.</li>
+                    <li>dans l'expression mathématique, il doit y avoir autant de crochets ouvrants que de crochets fermants.</li>
+                </ul>
+                Un moyen très simple de vérifier ce point de syntaxe est d'utiliser une pile.<br/>
+                On parcourt les caractères de l'expression une par une puis :
+                <ul>
+                    <li>S'il s'agît d'une parenthèse ouvrante ou d'un crochet ouvrant, on l'empile.</li>
+                    <li>S'il s'agît d'une parenthèse fermante ou d'un crochet fermant, on vérifie qu'il coïncide avec la valeur dépilée.</li>
+                    <li>Sinon on ne fait rien</li>  
+                </ul>
+                Ecrire une fonction <mark class="code">controle_syntaxe(expression)</mark> qui vérifie l'<mark class="code">expression</mark>.
+            </div>
+            <div class="exercice">
+                On souhaite enregistrer l'historique de navigation utilisable grâce aux boutons "précédent" ou "suivant" du navigateur dans des piles.
+                <ol>
+                    <li>Pourquoi une pile semble tout indiquée pour stocker les url des pages précédemment visitée ?</li>
+                    <li>Lorsque l'on utilise le bouton "précédent", comment stocker les url que l'on devra retrouver en utilisant "suivant" ?</li>
+                    <li>Ecrire un objet <mark class="code">historique</mark> contenant les méthodes suivantes :
+                        <mark class="code">visiter_site(url)</mark>, <mark class="code">page_actuelle()</mark>, <mark class="code">page_precedente()</mark>, <mark class="code">page_suivante()</mark><br/>
+                        Vous choisirez vous même les attributs que vous utiliserez.
+                    </li>
+                </ol>
+            </div>
+            <h2>Les files</h2>
+            <h3>Les besoins</h3>
+            <p>
+                Nous avons étudier une structure permettant de traiter des éléments dans leur ordre d'arrivée.
+                Dans une structure de file, on a accède au premier élément stocké. Le nom a été choisit car il fait le parallèles avec une file d'attente (à une caisse d'un magasin par exemple.).
+                Voici les seuls outils nécessaires :
+                <ul>
+                    <li>créer une file vide</li>
+                    <li>déterminer si une file est vide</li>
+                    <li>enfiler une valeur à la file (l'ajouter en fin de file)</li>
+                    <li>défiler une valeur à la file (lire puis retirer la valeur en début de file)</li>
+                </ul>
+                En anglais, on parle de <mark>queue</mark> ou de structure <mark>FIFO</mark> : "First In = First Out" c'est-à-dire « premier entré = premier sorti ».
+            </p>
+            <div class="exercice">
+                Décrire le contenu des variables <mark class="code">F</mark> et <mark class="code">v</mark> à la fin de ces instructions :
+                <ol>
+                    <li>F = nouvelle file vide</li>
+                    <li>enfiler 3 à F</li>
+                    <li>enfiler 2 à F</li>
+                    <li>v = défiler F</li>
+                    <li>enfiler 5 à F</li>
+                    <li>enfiler 7 à F</li>
+                    <li>enfiler 9 à F</li>
+                </ol>
+            </div>
+            <h3>Implémentation</h3>
+            <div class="exercice">
+                A l'aide du type <mark class="code">list</mark> de Python, proposer l'implémentation d'un objet modélisant une file.
+                Il faut implémenter les méthodes : <mark class="code">est_vide()</mark> ; <mark class="code">enfiler(valeur)</mark> et <mark class="code">defiler()</mark>.
+            </div>
+            <div class="exercice">
+                On peut aussi utiliser deux piles pour construire une file.
+                L'une des deux piles permet de stocker les éléments que l'on enfile, la seconde à stocker les éléments que l'on va défiler.
+                Appelons ces deux piles <mark class="code">E</mark> (comme entrée) et <mark class="code">S</mark> (comme sortie).
+                <ol>
+                    <li>Dans quelle pile empile-t-on la valeur que l'on souhaite empiler ?</li>
+                    <li>
+                        On souhaite défiler une valeur.
+                        <ol>Peut on dépiler la pile <mark class="code">E</mark> ?</ol>
+                        <ol>Dans quelle pile doit-on dépiler ?</ol>
+                        <ol>Si cette pile est vide, que faire ?</ol>
+                    </li>
+                    <li>
+                        Vérifier que cette structure respecte le comportement d'une file en dessinant les deux piles à chaque étape suivante :
+                        <ul>
+                            <li>Créer une file vide F</li>
+                            <li>Enfiler la valeur 1</li>
+                            <li>Enfiler la valeur 2</li>
+                            <li>Défiler une valeur</li>
+                            <li>Enfiler la valeur 3</li>
+                            <li>Défiler une valeur</li>
+                            <li>Défiler une valeur (encore)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Implémenter en Python une classe <mark class="code">File</mark> construite sur deux piles.
+                    </li>
+                </ol>
+            </div>
+            <h3>Applications</h3>
+            Pour tous les exercices suivants, vous importerez une des deux implémentations d'une file.
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">min_file(F)</mark> qui retourne la plus petite valeur contenue dans la file <mark class="code">F</mark>.<br/>
+                Attention, à la fin de cette fonction, la file <mark class="code">F</mark> doit avoir retrouvé son état initial.
+            </div>
+            <div class="exercice">
+                Ecrire une fonction <mark class="code">copie_file(F)</mark> qui retourne une copie de la file <mark class="code">F</mark>, c'est-à-dire une file contenant les mêmes valeurs que la file <mark class="code">F</mark>.<br/>
+                Attention, à la fin de cette fonction, la pile <mark class="code">F</mark> doit avoir retrouvé son état initial.
+            </div>
+            <div class="exercice">
+                <p>
+                    Le directeur d'une grande surface nous demande d'établir un moyen de prévoir le nombre de caisse à ouvrir en fonction du nombre de client entrant dans le magasin. Ainsi, l'influence habituelle du magasin permet de construire les planning d'ouverture de caisses.
+                </p>
+                <p>
+                    Nous allons réaliser des simulations aléatoires pour proposer une solution au directeur.
+                </p>
+                <p>
+                    On suppose qu'une étude préalable permet de modéliser le temps passé par les clients dans le magasin ainsi que les temps de passage en caisse (hors temps d'attente). Les fonctions suivantes à copier-coller représentent ces deux situations.
+                </p>
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        from random import gauss<br/>
+                        def temps_en_rayon() :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;''' Simule le temps passé dans les rayons par un client à l'aide d'une loi normale :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ de moyenne 48 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ d'écart-type 15 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrondi à l'unité et tronqué pour que le résultat soit compris entre 1 et 120 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'''<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;temps = int(gauss(48, 18))<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if temps &lt; 1 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temps = 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if temps &gt; 120 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temps = 120<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return temps<br/><br/>
+                        def temps_en_caisse() :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;''' Simule le temps passé à la caisse, sans compter le temps d'attente à l'aide d'une loi normale :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ de moyenne 8 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ d'écart-type 2 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrondi à l'unité et tronqué pour que le résultat soit compris entre 1 et 20 minutes<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;'''<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;temps = int(gauss(8, 2))<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if temps &lt; 1 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temps = 1<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if temps &gt; 20 :<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temps = 20<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;return temps<br/><br/>
+                    </p>
+                </div>
+                <p>
+                    Toutes les heures seront représentées par un nombre entier : le nombre de minutes depuis 0h00.
+                </p>
+                <ol>
+                    <li>
+                        Ecrire une classe <mark class="code">Client</mark> permettant de modéliser un des clients du magasin.
+                        Cette classe dispose des attributs et méthodes suivants :
+                        <ul>
+                            <li><mark class="code">heure_arrivee</mark> : l'heure d'arrivée</li>
+                            <li><mark class="code">temps_en_rayon</mark> : le temps que le client passera en rayon</li>
+                            <li><mark class="code">temps_restant_en_rayon</mark> : le temps qu'il reste au client en rayon</li>
+                            <li><mark class="code">temps_attente_en_caisse</mark> : le temps que le client a passé en caisse avant d'être encaissé, <mark class="code">0</mark> si le client est encore en rayon.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Ecrire une classe <mark class="code">Caisse</mark> permettant de modéliser une des caisses du magasin.
+                        Cette classe dispose des attributs et méthodes suivants :
+                        <ul>
+                            <li><mark class="code">heure_ouverture</mark> : heure d'ouverture de la caisse</li>
+                            <li><mark class="code">heure_fermeture</mark> : heure fermeture de la caisse</li>
+                            <li><mark class="code">est_ouverte(h)</mark> : retourne <mark class="code">True</mark> si la caisse est ouverte à l'heure <mark class="code">h</mark>, <mark class="code">False</mark> sinon.</li>
+                            <li><mark class="code">file_clients</mark> : une file contenant les clients qui attendent</li>
+                            <li><mark class="code">nb_file_clients</mark> : le nombre de clients qui attendent</li>
+                            <li><mark class="code">client_en_cours</mark> : le client qui se fait encaisser, <mark class="code">None</mark> s'il n'y a pas de clients</li>
+                            <li><mark class="code">duree_restante_encaissement</mark> : la durée restante pour finir d'encaisser le client</li>
+                            <li><mark class="code">est_libre()</mark> : retourne <mark class="code">True</mark> s'il n'y a pas de clients à encaisser, <mark class="code">False</mark> sinon.</li>
+                            <li><mark class="code">temps_sans_client</mark> : le nombre de minutes où la caisse est libre (c'est-à-dire sans client).</li>
+                            <li><mark class="code">temps_activite</mark> : le nombre de minutes où un client est en cours d'encaissement.</li>
+                        </ul>
+                        Le constructeur de cette classe doit permettre de choisir facilement l'heure d'ouverture et l'heure de fermeture de la caisse.
+                    </li>
+                    <li>
+                        Ecrire une classe <mark class="code">Magasin</mark> permettant de modéliser le magasin.
+                        Cette classe dispose des attributs et méthodes suivants :
+                        <ul>
+                            <li><mark class="code">clients_sortis</mark> : la liste de tous les clients qui ont été encaissés</li>
+                            <li><mark class="code">clients_en_magasin</mark> : la liste de tous les clients sont encore dans le magasin</li>
+                            <li><mark class="code">caisses</mark> : la liste de toutes les caisses du magasin</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Ajouter à la classe <mark class="code">Magasin</mark> la méthode suivante qui donne le nombre de clients qui entrent dans le magasin à un instant donné.
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                def influence(self, h) :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if h < 8*60 :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if h > 20*60-20 :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;I = [8, 15, 20, 22, 20, 14, 11, 13, 19, 22, 17, 8, 0]<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;i = (h - 8*60) // 60<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;m = (h - 8*60) % 60<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;return (I[i]*(60-m) + I[i+1]*m)//60
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        Créer une instance d'un magasin en choisissant vous même le nombre de caisses et leurs horaires d'ouverture et de fermeture.
+                    </li>
+                    <li>
+                        Ecrire une fonction <mark class="code">Simulation</mark> permettant de simuler une journée dans ce magasin.
+                        Cette fonction simule la journée minute par minute :
+                        <ul>
+                            <li>l'encaissement des clients progresse de 1 minute pour chaque caisse. Si l'encaissement est fini, le client sort du magasin et un nouveau encaissement se prépare</li>
+                            <li>les clients dans les files d'attente des caisses gagnent 1 minute sur leur temps d'attente en caisse</li>
+                            <li>les clients en rayon perdent 1 minute sur leur temps restant en rayon. Si ce temps passe à 0, le client se dirige vers une caisse ouverte et libre si possible, ou sinon vers la caisse ouverte avec le moins de client dans la file.</li>
+                            <li>de nouveaux client entre éventuellement dans le magasin.</li>
+                            <li>si une des caisses à plus de 3 personnes dans sa file d'attente, afficher l'heure qu'il est.</li>
+                        </ul>
+                        Une fois la journée terminée :
+                        <ul>
+                            <li>calculer et afficher le temps moyen d'attente en caisse.</li>
+                            <li>pour chaque caisse, afficher le temps passé sans client et son temps d'activité.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Changez le nombre de caisses et leur horaires pour proposer la solution qui vous parait optimale.
+                    </li>
+                </ol>
+            </div>
+            <h2>Les files</h2>
+            <p>
+                Lorsque l'on parle du type <mark class="code">list</mark> de python, on devrait parler de tableau et même plus précisément de tableau dynamique. En effet, l'implémentation de ce type permet d’accéder directement aux valeurs du tableau (complexité : <mark class='code'>O(1)</mark>) alors que l'insertion ou la suppression de valeurs dans cette liste se fait en complexité linéaire (<mark class='code'>O(n)</mark>).
+            </p>
+            <p>
+                La structure de liste proposée dès 1955 s'apparente plus à la structure d'une chaîne composé de maillons.
+            </p>
+            <h3>Listes simplement chaînées</h3>
+            Une liste est dite simplement chaînée si à partir d'un élément de la liste (que l'on appellera maillon), on ne peut accéder qu'à l'élément suivant.
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Ecrire une classe <mark class="code">Maillon</mark> qui contient les attributs suivants :
+                        <ul>
+                            <li><mark class="code">valeur</mark> la valeur de cet élément</li>
+                            <li><mark class="code">suivant</mark> une référence vers la maillon suivant de la liste, ou <mark class="code">None</mark> s'il s'agît du dernier élément.</li>
+                        </ul>
+                        Le constructeur doit accepter un seul paramètre (<mark class="code">valeur</mark>) ou deux paramètres (<mark class="code">valeur</mark> et <mark class="code">maillon_suivant</mark>)
+                    </li>
+                    <li>
+                        Ecrire une classe <mark class="code">Liste</mark> qui permet de construire une liste simplement chaînée vide. Le constructeur n'accepte donc aucun paramètres. Les attributs de cette classe sont :
+                        <ul>
+                            <li><mark class="code">premier_maillon</mark> une référence vers le premier maillon de la liste, ou <mark class="code">None</mark> si la liste est vide.</li>
+                            <li><mark class="code">nb_elements</mark> le nombre d'éléments de cette liste.</li>
+                            <li><mark class="code">maillon_en_cours</mark> le maillon que l'on est en train de parcourir.</li>
+                            <li><mark class="code">indice_en_cours</mark> la position du mayon que l'on parcourt dans la liste.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Ajouter les méthodes suivantes à la classe <mark class="code">Liste</mark> :
+                        <ul>
+                            <li><mark class="code">est_vide()</mark> retourne <mark class="code">True</mark> si la liste est vide, <mark class="code">False</mark> sinon.</li>
+                            <li><mark class="code">longueur()</mark> retourne le nombre d'éléments de cette liste.</li>
+                            <li><mark class="code">valeur_en_cours()</mark> retourne la valeur du maillon en cours</li>
+                            <li><mark class="code">valeur_suivante()</mark> se déplace au maillon suivant et retourne sa valeur</li>
+                            <li><mark class="code">aller_a(index)</mark> se place sur le maillon à la position index.</li>
+                            <li><mark class="code">lire(index)</mark> retourne la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">inserer(index, valeur)</mark> insère la <mark class="code">valeur</mark> au bon endroit dans la liste.</li>
+                            <li><mark class="code">__str__()</mark> retourne une chaîne de caractères contenant tous les éléments de cette liste.</li>
+                            <li><mark class="code">remplacer(index, valeur)</mark> remplace la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">supprimer(index)</mark> supprime la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">sous_liste(debut, fin)</mark> retourne une liste contenant les valeurs de la position <mark class="code">debut</mark> inclus à la position <mark class="code">fin</mark> exclus.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <h3>Listes doublement chaînées</h3>
+            Une liste est dite doublement chaînée si à partir d'un élément de la liste, on ne peut accéder à l'élément suivant et à l'élément précédent.
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Ecrire une classe <mark class="code">Maillon</mark> qui contient les attributs suivants :
+                        <ul>
+                            <li><mark class="code">valeur</mark> la valeur de cet élément</li>
+                            <li><mark class="code">suivant</mark> une référence vers la maillon suivant de la liste, ou <mark class="code">None</mark> s'il s'agît du dernier élément.</li>
+                            <li><mark class="code">precedent</mark> une référence vers la maillon suivant de la liste, ou <mark class="code">None</mark> s'il s'agît du dernier élément.</li>
+                        </ul>
+                        Le constructeur doit accepter un seul paramètre (<mark class="code">valeur</mark>) ou trois paramètres (<mark class="code">valeur</mark>, <mark class="code">maillon_precedent</mark> et <mark class="code">maillon_suivant</mark>).<br/>
+                        Pensez aussi à mettre à jour les attributs des maillons attachés à ce maillon !
+                    </li>
+                    <li>
+                        Ecrire une classe <mark class="code">Liste</mark> qui permet de construire une liste doublement chaînée vide. Le constructeur n'accepte donc aucun paramètres. Les attributs de cette classe sont :
+                        <ul>
+                            <li><mark class="code">premier_maillon</mark> une référence vers le premier maillon de la liste, ou <mark class="code">None</mark> si la liste est vide.</li>
+                            <li><mark class="code">dernier_maillon</mark> une référence vers le dernier maillon de la liste, ou <mark class="code">None</mark> si la liste est vide.</li>
+                            <li><mark class="code">nb_elements</mark> le nombre d'éléments de cette liste.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Ajouter les méthodes suivantes à la classe <mark class="code">Liste</mark> :
+                        <ul>
+                            <li><mark class="code">est_vide()</mark> retourne <mark class="code">True</mark> si la liste est vide, <mark class="code">False</mark> sinon.</li>
+                            <li><mark class="code">longueur()</mark> retourne le nombre d'éléments de cette liste.</li>
+                            <li><mark class="code">inserer(index, valeur)</mark> insère la <mark class="code">valeur</mark> au bon endroit dans la liste.</li>
+                            <li><mark class="code">remplacer(index, valeur)</mark> remplace la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">supprimer(index)</mark> supprime la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">lire(index)</mark> retourne la <mark class="code">valeur</mark> de l'élément de la liste à la position <mark class="code">index</mark>.</li>
+                            <li><mark class="code">__str__()</mark> retourne une chaîne de caractères contenant tous les éléments de cette liste.</li>
+                            <li><mark class="code">sous_liste(debut, fin)</mark> retourne une liste contenant les valeurs de la position <mark class="code">debut</mark> inclus à la position <mark class="code">fin</mark> exclus.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            <h3>Application</h3>
+            <div class="exercice">
+                La méthode <mark class="code">defiler</mark> de nos deux implémentations de la classe <mark class="code">File</mark> ont une complexité en <mark class="code">O(n)</mark> car on est amené à supprimer le premier élément d'un tableau (type <mark class="code">list</mark> de python) ou bien de dépiler entièrement une pile.<br/>
+                Les listes doublement chaînées permettent de résoudre ce problème et de proposer une méthode <mark class="code">defiler</mark> de complexité <mark class="code">O(1)</mark>.<br/>
+                Ecrire l'implémentation d'une classe <mark class="code">File</mark> faisant appel à une liste doublement chaînée.
+            </div>
+        </div>
+        <script type="text/javascript" src="../script.js"></script>
+    </body>
+</html>
