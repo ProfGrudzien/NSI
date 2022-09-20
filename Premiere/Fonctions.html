@@ -57,7 +57,7 @@
                 </p>
             </div>
             <p>
-                Remarque : lorsque l'instruction <mark class="code">return</mark> est exécutée, la fonction s'arrête. Les instructions suivantes ne sont donc pas executées. Cela permet souvent de simplifier un test <mark class="code">if</mark> car la partie <mark class="code">else</mark> devient souvent facultative. Exemple :
+                Remarque : lorsque l'instruction <mark class="code">return</mark> est exécutée, la fonction s'arrête. Les instructions suivantes ne sont donc pas exécutées. Cela permet souvent de simplifier un test <mark class="code">if</mark> car la partie <mark class="code">else</mark> devient souvent facultative. Exemple :
             <div class="algo">
                 <input type="button" class="copier" value="📑" title="copier">
                 <p class="code">
@@ -150,7 +150,7 @@
             </div>
             <h2>Fonctions retournant plusieurs valeurs</h2>
             <p>
-                Une fonction peur retourner plusieurs valeurs. Les valeurs peuvent être récupérées en utilisant autant de variables. Exemple :
+                Une fonction peut retourner plusieurs valeurs. Les valeurs peuvent être récupérées en utilisant autant de variables. Exemple :
             </p>
             <div class="algo">
                 <input type="button" class="copier" value="📑" title="copier">
@@ -168,7 +168,7 @@
                     yB = 8 <br/>
                     print("Le point B a pour coordonnées (", xB, ";", yB, ")") <br/>
                     <br/>
-                    xM, yM = milieu(2, 3, 7, 8) <br/>
+                    xM, yM = milieu(xA, yA, xB, yB) <br/>
                     print("Le milieu du segment [AB] a pour coordonnées (", xM, ";", yM, ")")
                 </p>
             </div>
@@ -182,7 +182,7 @@
             </div>
             <h2>Portée des variables</h2>
             <p>
-                Pour ne pas se soucier des variables qui existent déjà, les variables déclarées à l'intérieur d'une fonction sont <mark>locales</mark>. C'est notament le cas des variables correspondant aux paramètres de la fonction. Un variable locale est utilisable uniquement dans la fonction où elle est déclarée. Elle est totalement indépendante d'une variable qui porterai le même nom mais qui serait déclarée à l'extérieur de la fonction. Illustration :
+                Pour ne pas se soucier des variables qui existent déjà, les variables déclarées à l'intérieur d'une fonction sont <mark>locales</mark>. C'est notamment le cas des variables correspondant aux paramètres de la fonction. Un variable locale est utilisable uniquement dans la fonction où elle est déclarée. Elle est totalement indépendante d'une variable qui porterai le même nom mais qui serait déclarée à l'extérieur de la fonction. Illustration :
             </p>
             <div class="algo">
                 <input type="button" class="copier" value="📑" title="copier">
@@ -201,7 +201,7 @@
                 </p>
             </div>
             <p>
-                En revanche, on peut accéder depuis une fonction à une variable déclarée en dehors de cette fonction. Il est cependant impossible de lui assigner une nouvelle valeur. Même s'il est possible de déclarée une variable comme <mark>globale</mark> pour pouvoir lui affecter une nouvelle valeur, il est plus sage de placer cette variable en paramètre et retourner sa nouvelle valeur grâce à <mark class="code">return</mark>.
+                En revanche, on peut accéder depuis une fonction à une variable déclarée en dehors de cette fonction. Il est cependant impossible de lui assigner une nouvelle valeur. Même s'il est possible de déclarer une variable comme <mark>globale</mark> pour pouvoir lui affecter une nouvelle valeur, il est plus sage de placer cette variable en paramètre et retourner sa nouvelle valeur grâce à <mark class="code">return</mark>.
             </p>
             <p>Exemple avec <mark class="code">global</mark> :</p>
             <div class="algo">
@@ -292,7 +292,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return True<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;if reponse == "non" or reponse == "Non" or reponse == "NON" :<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return False<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;print("Réponse incorrecte : vous devez réponse par "oui" ou par "non".)<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print('Réponse incorrecte : vous devez réponse par "oui" ou par "non".')<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;return demander_oui_non(question)<br/>
                 </p>
             </div>
