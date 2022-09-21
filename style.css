@@ -170,6 +170,10 @@ mark.code{
     text-align: center;
 }
 
+.adroite {
+    text-align: right;
+}
+
 span.frac{
     display: inline-block;
     position: relative;
