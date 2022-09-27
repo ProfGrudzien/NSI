@@ -1,0 +1,17 @@
+input[type=number].enigme { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+    text-align: center;
+    font-size: 14pt;
+}
+
+input[type=button].enigme { 
+    height: 50px;
+    width: 50px;
+    margin: 4px;
+    text-align: center;
+    font-size: 14pt;
+}

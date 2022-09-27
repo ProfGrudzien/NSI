@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="../../../style.css"/>
         <link rel="stylesheet" href="Animations.css"/>
         <link rel="stylesheet" href="Exerciseur.css"/>
+        <link rel="stylesheet" href="Enigme.css"/>
     </head>
     <body>
         <div class="main">
@@ -195,13 +196,6 @@
                     <li>9999<sub>10</sub></li>
                 </ol>
             </div>
-            <div class="exercice">
-                Sur un disque dur, j'ai trouvé où se situais le mot de passe à 4 chiffres permettant d'accéder à l'ordinateur :
-                <p class="centrer">
-                0001011001100100
-                </p>
-                Quel est le code à 4 chiffres ?
-            </div>
             <h2>Addition de nombres en binaire</h2>
             <p>
                 L’addition avec des nombres en binaires se déroule de la même façon que l’addition avec des nombres en base 10 : on pose l’addition en utilisant des retenues. Exemple :
@@ -209,10 +203,26 @@
             <div class="animation" id="addition">
                 <input type="button" value="▶" class="lancer"/>
             </div>
+            <h2>Pour aller plus loin</h2>
+            <div class="exercice">
+                Sur un disque dur, j'ai trouvé où se situais le mot de passe à 4 chiffres permettant d'accéder à l'ordinateur :
+                <p class="centrer" id="enigmeCode"></p>
+                Quel est le code à 4 chiffres ?
+                <p class="centrer">
+                    <input type=number id="chiffre1" class="enigme">
+                    <input type=number id="chiffre2" class="enigme">
+                    <input type=number id="chiffre3" class="enigme">
+                    <input type=number id="chiffre4" class="enigme">
+                    <input type=button value="↵" class="enigme" id="btnEnigme">
+                </p>
+                <p class="centrer" id="enigmeMessage"></p>
+            </div>
+            
         </div>
         <script type="text/javascript" src="../../../script.js"></script>
         <script type="text/javascript" src="Decomposer.js"></script>
         <script type="text/javascript" src="Addition.js"></script>
         <script type="text/javascript" src="Exerciseur.js"></script>
+        <script type="text/javascript" src="Enigme.js"></script>
     </body>
 </html>
