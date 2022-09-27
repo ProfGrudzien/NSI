@@ -135,9 +135,17 @@
                 <tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
                 <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
             </table>
-            <div>
-                On a donc (121)<sub>10</sub> = (0111 1001)<sub>2</sub>
-            </div>
+            <div>On a donc (121)<sub>10</sub> = (0111 1001)<sub>2</sub></div>
+            <p>
+                Mais comment trouver cette décomposition en puissance de 2 ?<br/>
+                Tout simplement en cherchant à soustraire la plus grande puissance de 2 possible au nombre choisit.<br/>
+                Pour 121, cela donne :<br/>
+                121 - <mark>64</mark> = 57<br/>
+                57 - <mark>32</mark> = 25<br/>
+                25 - <mark>16</mark> = 9<br/>
+                9 - <mark>8</mark> = 1<br/>
+                1 - <mark>1</mark> = 0
+            </p>
             <div class="exercice">
                 Quelle est la représentation en base 2 des nombres :
                 <ol class="sous-num">
@@ -151,6 +159,39 @@
                 <div id="decimalVersBinaire" class="exerciseur"></div>
                 <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
             </div>
+            <h2>Addition de nombres en binaire</h2>
+            <p>
+                L’addition avec des nombres en binaires se déroule de la même façon que l’addition avec des nombres en base 10 : on pose l’addition en utilisant des retenues.
+            </p>
+            <p>
+                On retiendra que, en binaire :
+                <ul>
+                    <li>0 + 0 = 0</li>
+                    <li>0 + 1 = 1</li>
+                    <li>1 + 1 = 10</li>
+                    <li>1 + 1 + 1 = 11</li>
+                </ul>
+            </p>
+            <p>Exemple :</p>
+            <div class="animation" id="addition">
+                <input type="button" value="▶" class="lancer"/>
+            </div>
+            <h2>Pour aller plus loin</h2>
+            <h3>Une petite énigme</h3>
+                <div class="exercice">
+                    Sur un disque dur, j'ai trouvé où se situais le mot de passe à 4 chiffres permettant d'accéder à l'ordinateur :
+                    <p class="centrer" id="enigmeCode"></p>
+                    Quel est le code à 4 chiffres ?
+                    <p class="centrer">
+                        <input type=number id="chiffre1" class="enigme">
+                        <input type=number id="chiffre2" class="enigme">
+                        <input type=number id="chiffre3" class="enigme">
+                        <input type=number id="chiffre4" class="enigme">
+                        <input type=button value="↵" class="enigme" id="btnEnigme">
+                    </p>
+                    <p class="centrer" id="enigmeMessage"></p>
+                </div>
+            <h3>Méthode par divisions pour convertir du décimal en binaire</h3>
             <p>
                 Il existe une autre méthode qui ne nécessite pas de connaître les puissances de 2 : la méthode par divisions.<br/>
                 Cette méthode donne la représentation binaire du nombre en décimal bit par bit en partant de la droite en suivant les étapes suivantes :
@@ -167,22 +208,28 @@
                         121 est impair, le dernier bit sera donc 1. On considère maintenant 121 // 2 = 60.
                     </li>
                     <li>
-                        60 est pair, les derniers bits seront donc 0<font color="gray">1</font>. On considère maintenant 60 // 2 = 30.
+                        60 est pair, les derniers bits seront donc 0<font color="gray">1</font>.
+                        On considère maintenant 60 // 2 = 30.
                     </li>
                     <li>
-                        30 est pair, les derniers bits seront donc 0<font color="gray">01</font>. On considère maintenant 30 // 2 = 15.
+                        30 est pair, les derniers bits seront donc 0<font color="gray">01</font>.
+                        On considère maintenant 30 // 2 = 15.
                     </li>
                     <li>
-                        15 est impair, les derniers bits seront donc 1<font color="gray">001</font>. On considère maintenant 15 // 2 = 7.
+                        15 est impair, les derniers bits seront donc 1<font color="gray">001</font>.
+                        On considère maintenant 15 // 2 = 7.
                     </li>
                     <li>
-                        7 est impair, les derniers bits seront donc 1 <font color="gray">1001</font>. On considère maintenant 7 // 2 = 3.
+                        7 est impair, les derniers bits seront donc 1 <font color="gray">1001</font>.
+                        On considère maintenant 7 // 2 = 3.
                     </li>
                     <li>
-                        3 est impair, les derniers bits seront donc 1<font color="gray">1 1001</font>. On considère maintenant 3 // 2 = 1.
+                        3 est impair, les derniers bits seront donc 1<font color="gray">1 1001</font>.
+                        On considère maintenant 3 // 2 = 1.
                     </li>
                     <li>
-                        1 est impair, les derniers bits seront donc 1<font color="gray">11 1001</font>. On considère maintenant 1 // 2 = 0. Le processus s'arrête.
+                        1 est impair, les derniers bits seront donc 1<font color="gray">11 1001</font>.
+                        On considère maintenant 1 // 2 = 0. Le processus s'arrête.
                     </li>
                 </ul>
                 Donc (121)<sub>10</sub> = (<font color="gray">0</font>111 1001)<sub>2</sub>
@@ -196,32 +243,22 @@
                     <li>9999<sub>10</sub></li>
                 </ol>
             </div>
-            <h2>Addition de nombres en binaire</h2>
+            <h3>Soustraction en binaire</h3>
+            <h3>Multiplication en binaire</h3>
             <p>
-                L’addition avec des nombres en binaires se déroule de la même façon que l’addition avec des nombres en base 10 : on pose l’addition en utilisant des retenues. Exemple :
+                On suit le même principe que lorsque l'on pose une multiplication en base 10.<br/>
+                La première étape consiste en des multiplications par 0 ou par 1 en binaire.<br/>
+                La deuxième étape consiste en une addition.<br/>
+                Exemple :
             </p>
-            <div class="animation" id="addition">
+            <div class="animation" id="multiplication">
                 <input type="button" value="▶" class="lancer"/>
             </div>
-            <h2>Pour aller plus loin</h2>
-            <div class="exercice">
-                Sur un disque dur, j'ai trouvé où se situais le mot de passe à 4 chiffres permettant d'accéder à l'ordinateur :
-                <p class="centrer" id="enigmeCode"></p>
-                Quel est le code à 4 chiffres ?
-                <p class="centrer">
-                    <input type=number id="chiffre1" class="enigme">
-                    <input type=number id="chiffre2" class="enigme">
-                    <input type=number id="chiffre3" class="enigme">
-                    <input type=number id="chiffre4" class="enigme">
-                    <input type=button value="↵" class="enigme" id="btnEnigme">
-                </p>
-                <p class="centrer" id="enigmeMessage"></p>
-            </div>
-            
         </div>
         <script type="text/javascript" src="../../../script.js"></script>
         <script type="text/javascript" src="Decomposer.js"></script>
         <script type="text/javascript" src="Addition.js"></script>
+        <script type="text/javascript" src="Multiplication.js"></script>
         <script type="text/javascript" src="Exerciseur.js"></script>
         <script type="text/javascript" src="Enigme.js"></script>
     </body>

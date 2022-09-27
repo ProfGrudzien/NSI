@@ -16,7 +16,6 @@ function binaireVersDecimal(event) {
         div.removeChild(element);
         element = div.lastElementChild;
     }
-    const couleurs = ["#a0522d", "#c3c3c3", "#1e90ff", "#3cb371", "#ffff00", "#ffa500", "#ff6347", "#9932cc"]
     const form = document.createElement("form");
     div.appendChild(form);
     form.base10 = Math.floor(5 + Math.random() * 250);
@@ -42,8 +41,8 @@ function binaireVersDecimal(event) {
             const form = label.parentNode
             const bits = Array.from(form.base2);
             while (bits.length < 8) {bits.unshift('0')}
-            const tdbits = bits.map((bit, i) => `<td><font color="${couleurs[i]}">${bit}</font></td>`)
-            const colordeci = bits.map((bit, i) => bit == "0" ? "" : `<font color="${couleurs[i]}">${Math.pow(2, 7-i)}</font>`)
+            const tdbits = bits.map((bit, i) => `<td>${bit}</td>`)
+            const colordeci = bits.map((bit, i) => bit == "0" ? "" : Math.pow(2, 7-i))
             const tddeci = colordeci.map(dec => `<td>${dec}</td>`)
             label.innerHTML = `
                 <table>
