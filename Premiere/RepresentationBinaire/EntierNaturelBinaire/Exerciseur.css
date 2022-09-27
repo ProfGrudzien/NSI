@@ -24,7 +24,7 @@ input[type=button], input[type=submit] {
     height: 50px;
 }
 
-#reload {
+.reload {
     width: 50px;
     clear: both;
     font-size: 24pt;

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="../../../style.css"/>
-        <link rel="stylesheet" href="Animation.css"/>
+        <link rel="stylesheet" href="Animations.css"/>
         <link rel="stylesheet" href="Exerciseur.css"/>
     </head>
     <body>
@@ -25,42 +25,16 @@
                 Le chiffre binaire qui peut prendre ces deux états est nommé "Bit" (Binary digit). On fait correspondre les nombres décimaux aux nombres binaire en les écrivant dans l'ordre croissant :
             </p>
             <table>
-                <tr>
-                    <th>Nombre en décimal</th>
-                    <th>Nombre en binaire</th>
+                <tr><th>Nombre en décimal</th><th>Nombre en binaire</th>
                 </tr>
-                <tr>
-                    <td>0</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>100</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>101</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>110</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>111</td>
-                </tr>
+                <tr><td>0</td><td>0</td></tr>
+                <tr><td>1</td><td>1</td></tr>
+                <tr><td>2</td><td>10</td></tr>
+                <tr><td>3</td><td>11</td></tr>
+                <tr><td>4</td><td>100</td></tr>
+                <tr><td>5</td><td>101</td></tr>
+                <tr><td>6</td><td>110</td></tr>
+                <tr><td>7</td><td>111</td></tr>
             <table>
             <p>
                 Pour ne pas confondre les deux représentations, on écrit les nombres dans des parenthèses en ajoutant la base en indice. Ainsi (101)<sub>10</sub> est différent de (101)<sub>2</sub> = (5)<sub>10</sub>.
@@ -94,26 +68,11 @@
                 A l'aide du tableau établi dans les exercices précédents, on peut facilement constater que les nombres binaires commençant par un 1 suivi de 0 sont les puissances de 2 :
             </p>
             <table>
-                <tr>
-                    <th>Nombre en binaire</th>
-                    <th>Nombre en décimal</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1 = 2<sup>0</sup></td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>2 = 2<sup>1</sup></td>
-                </tr>
-                <tr>
-                    <td>100</td>
-                    <td>4 = 2<sup>2</sup></td>
-                </tr>
-                <tr>
-                    <td>1000</td>
-                    <td>8 = 2<sup>3</sup></td>
-                </tr>
+                <tr><th>Nombre en binaire</th><th>Nombre en décimal</th></tr>
+                <tr><td>1</td><td>1 = 2<sup>0</sup></td></tr>
+                <tr><td>10</td><td>2 = 2<sup>1</sup></td></tr>
+                <tr><td>100</td><td>4 = 2<sup>2</sup></td></tr>
+                <tr><td>1000</td><td>8 = 2<sup>3</sup></td></tr>
             <table>
             <div class="exercice">
                 Quelle est la représentation en base 10 de (1000 0000)<sub>2</sub> ?
@@ -124,8 +83,8 @@
             <p>
                 La remarque précédente permet de convertir en base 10 un nombre donné en binaire en le décomposant.
             </p>
-            <div id="animation">
-                <input type="button" value="▶" id="lancer"/>
+            <div class="animation" id="decomposer">
+                <input type="button" value="▶" class="lancer"/>
             </div>
             <div class="exercice">
                 Quelle est la représentation en base 10 des nombres :
@@ -136,13 +95,124 @@
                     <li>(1000 0110 0001 1001)<sub>2</sub></li>
                 </ol>
             </div>
+            <p>
+                Pour plus de facilité, on peut utiliser le tableau suivant :
+                <table>
+                    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>2<sup>7</sup></td><td>2<sup>6</sup></td><td>2<sup>5</sup></td><td>2<sup>4</sup></td><td>2<sup>3</sup></td><td>2<sup>2</sup></td><td>2<sup>1</sup></td><td>2<sup>0</sup></td></tr>
+                    <tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+                    <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                </table>
+            </p>
+            <div>
+                Exemple pour convertir (1010 1100)<sub>2</sub>
+            </div>
+            <table>
+                <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                <tr><td>2<sup>7</sup></td><td>2<sup>6</sup></td><td>2<sup>5</sup></td><td>2<sup>4</sup></td><td>2<sup>3</sup></td><td>2<sup>2</sup></td><td>2<sup>1</sup></td><td>2<sup>0</sup></td></tr>
+                <tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+                <tr><td>128</td><td>0</td><td>32</td><td>0</td><td>8</td><td>4</td><td>0</td><td>0</td></tr>
+            </table>
+            <div>
+                En ajoutant les valeurs de la dernière ligne, on obtient 128 + 32 + 8 + 4 = 172.
+                Donc : (1010 1100)<sub>2</sub> = (172)<sub>10</sub>
+            </div>
             <div class="exercice">
                 <div id="binaireVersDecimal" class="exerciseur"></div>
-                <p class="adroite"><input type=button value=" ↻ " id="reload"></p>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
+            <h2>Conversion décimal vers binaire</h2>
+            <p>
+                Pour écrire en base 2 un nombre en base 10, on réalise la décomposition du nombre grâce à des puissance de 2.
+            </p>
+            <div>
+                Exemple : 121 = 64 + 32 + 16 + 8 + 1 = 2<sup>6</sup> + 2<sup>5</sup> + 2<sup>4</sup> + 2<sup>3</sup> + 2<sup>0</sup>.
+                Il ne reste plus qu'à remplir le tableau :
+            </div>
+            <table>
+                <tr><td>2<sup>7</sup></td><td>2<sup>6</sup></td><td>2<sup>5</sup></td><td>2<sup>4</sup></td><td>2<sup>3</sup></td><td>2<sup>2</sup></td><td>2<sup>1</sup></td><td>2<sup>0</sup></td></tr>
+                <tr><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+                <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+            </table>
+            <div>
+                On a donc (121)<sub>10</sub> = (0111 1001)<sub>2</sub>
+            </div>
+            <div class="exercice">
+                Quelle est la représentation en base 2 des nombres :
+                <ol class="sous-num">
+                    <li>(100)<sub>10</sub></li>
+                    <li>(150)<sub>10</sub></li>
+                    <li>(666)<sub>10</sub></li>
+                    <li>(737)<sub>10</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <div id="decimalVersBinaire" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
+            <p>
+                Il existe une autre méthode qui ne nécessite pas de connaître les puissances de 2 : la méthode par divisions.<br/>
+                Cette méthode donne la représentation binaire du nombre en décimal bit par bit en partant de la droite en suivant les étapes suivantes :
+                <ol>
+                    <li>Si le nombre est impair, le bit suivant est un 1, sinon c'est un 0</li>
+                    <li>Répéter l'opération avec le quotient entier de la division du nombre par 2</li>
+                </ol>
+                Le processus s'arrête dès que le quotient entier est égal à 0.
+            </p>
+            <p>
+                Exemple pour (121)<sub>10</sub> :
+                <ul>
+                    <li>
+                        121 est impair, le dernier bit sera donc 1. On considère maintenant 121 // 2 = 60.
+                    </li>
+                    <li>
+                        60 est pair, les derniers bits seront donc 0<font color="gray">1</font>. On considère maintenant 60 // 2 = 30.
+                    </li>
+                    <li>
+                        30 est pair, les derniers bits seront donc 0<font color="gray">01</font>. On considère maintenant 30 // 2 = 15.
+                    </li>
+                    <li>
+                        15 est impair, les derniers bits seront donc 1<font color="gray">001</font>. On considère maintenant 15 // 2 = 7.
+                    </li>
+                    <li>
+                        7 est impair, les derniers bits seront donc 1 <font color="gray">1001</font>. On considère maintenant 7 // 2 = 3.
+                    </li>
+                    <li>
+                        3 est impair, les derniers bits seront donc 1<font color="gray">1 1001</font>. On considère maintenant 3 // 2 = 1.
+                    </li>
+                    <li>
+                        1 est impair, les derniers bits seront donc 1<font color="gray">11 1001</font>. On considère maintenant 1 // 2 = 0. Le processus s'arrête.
+                    </li>
+                </ul>
+                Donc (121)<sub>10</sub> = (<font color="gray">0</font>111 1001)<sub>2</sub>
+            </p>
+            <div class="exercice">
+                Quelle est la représentation en base 2 des nombres :
+                <ol class="sous-num">
+                    <li>1555<sub>10</sub></li>
+                    <li>1664<sub>10</sub></li>
+                    <li>2048<sub>10</sub></li>
+                    <li>9999<sub>10</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Sur un disque dur, j'ai trouvé où se situais le mot de passe à 4 chiffres permettant d'accéder à l'ordinateur :
+                <p class="centrer">
+                0001011001100100
+                </p>
+                Quel est le code à 4 chiffres ?
+            </div>
+            <h2>Addition de nombres en binaire</h2>
+            <p>
+                L’addition avec des nombres en binaires se déroule de la même façon que l’addition avec des nombres en base 10 : on pose l’addition en utilisant des retenues. Exemple :
+            </p>
+            <div class="animation" id="addition">
+                <input type="button" value="▶" class="lancer"/>
             </div>
         </div>
         <script type="text/javascript" src="../../../script.js"></script>
-        <script type="text/javascript" src="Animation.js"></script>
+        <script type="text/javascript" src="Decomposer.js"></script>
+        <script type="text/javascript" src="Addition.js"></script>
         <script type="text/javascript" src="Exerciseur.js"></script>
     </body>
 </html>
