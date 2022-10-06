@@ -176,6 +176,33 @@
             <div class="animation" id="addition">
                 <input type="button" value="▶" class="lancer"/>
             </div>
+            <div class="exercice">
+                Poser les additions suivantes :
+                <ol>
+                    <li>(1100)<sub>2</sub> + (0011)<sub>2</sub></li>
+                    <li>(1111)<sub>2</sub> + (0101)<sub>2</sub></li>
+                    <li>(1010&nbsp;1010)<sub>2</sub> + (0011&nbsp;0011)<sub>2</sub></li>
+                    <li>(1100&nbsp;1101)<sub>2</sub> + (1110&nbsp;0011)<sub>2</sub></li>
+                </ol>
+            </div>
+            <p>
+                <b>Mais :</b> beaucoup de langages de programmation alloue à l’avance un espace dans la mémoire pour stocker les données. Pour les nombres entiers, dans le langage C, il existe :
+                <ul>
+                    <li>char, codé sur 1 octet</li>
+                    <li>short et int, codés sur 2 octets.</li>
+                    <li>long, codé sur 4 octets.</li>
+                </ul>
+                Si le résultat est plus grand que l’espace alloué, on observe alors un phénomène de dépassement de mémoire. Le résultat donné par l’ordinateur est alors faux. Exemple : on souhaite utiliser des variables codés sur 1 octet pour réaliser la somme : (1110&nbsp;1011)<sub>2</sub>&nbsp;+&nbsp;(1011&nbsp;1011)<sub>2</sub>.
+            </p>
+            <p class="mono centrer">
+                <font color="blue">&nbsp;&nbsp;&nbsp;1 1 1 1&nbsp;&nbsp;&nbsp;1 1&nbsp;&nbsp;</font><br/>
+                &nbsp;&nbsp;&nbsp;1 1 1 0 1 0 1 1<br/>
+                <u>+&nbsp;&nbsp;1 0 1 1 1 0 1 1</u><br/>
+                &nbsp;<font color="red">1</font> 1 0 1 0 0 1 1 0
+            </p>
+            <p>
+                Le résultat enregistré est (1010&nbsp;0110)<sub>2</sub> = (166)<sub>10</sub> à la place de (1&nbsp;1010&nbsp;0110)<sub>10</sub> = (422)<sub>2</sub>.
+            </p>
             <h2>Pour aller plus loin</h2>
             <h3>Une petite énigme</h3>
                 <div class="exercice">
@@ -205,30 +232,31 @@
                 Exemple pour (121)<sub>10</sub> :
                 <ul>
                     <li>
-                        121 est impair, le dernier bit sera donc 1. On considère maintenant 121 // 2 = 60.
+                        121 est impair, le dernier bit sera donc 1.<br/>
+                        On considère maintenant 121 // 2 = 60.
                     </li>
                     <li>
-                        60 est pair, les derniers bits seront donc 0<font color="gray">1</font>.
+                        60 est pair, les derniers bits seront donc 0<font color="gray">1</font>.<br/>
                         On considère maintenant 60 // 2 = 30.
                     </li>
                     <li>
-                        30 est pair, les derniers bits seront donc 0<font color="gray">01</font>.
+                        30 est pair, les derniers bits seront donc 0<font color="gray">01</font>.<br/>
                         On considère maintenant 30 // 2 = 15.
                     </li>
                     <li>
-                        15 est impair, les derniers bits seront donc 1<font color="gray">001</font>.
+                        15 est impair, les derniers bits seront donc 1<font color="gray">001</font>.<br/>
                         On considère maintenant 15 // 2 = 7.
                     </li>
                     <li>
-                        7 est impair, les derniers bits seront donc 1 <font color="gray">1001</font>.
+                        7 est impair, les derniers bits seront donc 1 <font color="gray">1001</font>.<br/>
                         On considère maintenant 7 // 2 = 3.
                     </li>
                     <li>
-                        3 est impair, les derniers bits seront donc 1<font color="gray">1 1001</font>.
+                        3 est impair, les derniers bits seront donc 1<font color="gray">1 1001</font>.<br/>
                         On considère maintenant 3 // 2 = 1.
                     </li>
                     <li>
-                        1 est impair, les derniers bits seront donc 1<font color="gray">11 1001</font>.
+                        1 est impair, les derniers bits seront donc 1<font color="gray">11 1001</font>.<br/>
                         On considère maintenant 1 // 2 = 0. Le processus s'arrête.
                     </li>
                 </ul>
@@ -237,13 +265,12 @@
             <div class="exercice">
                 Quelle est la représentation en base 2 des nombres :
                 <ol class="sous-num">
-                    <li>1555<sub>10</sub></li>
-                    <li>1664<sub>10</sub></li>
-                    <li>2048<sub>10</sub></li>
-                    <li>9999<sub>10</sub></li>
+                    <li>(1555)<sub>10</sub></li>
+                    <li>(1664)<sub>10</sub></li>
+                    <li>(2048)<sub>10</sub></li>
+                    <li>(9999)<sub>10</sub></li>
                 </ol>
             </div>
-            <h3>Soustraction en binaire</h3>
             <h3>Multiplication en binaire</h3>
             <p>
                 On suit le même principe que lorsque l'on pose une multiplication en base 10.<br/>
