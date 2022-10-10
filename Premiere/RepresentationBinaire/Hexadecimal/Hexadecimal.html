@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="../../../style.css"/>
+        <link rel="stylesheet" href="divisionEuclidienne.css"/>
+        <link rel="stylesheet" href="Exerciseur.css"/>
     </head>
     <body>
         <div class="main">
@@ -41,15 +43,107 @@ d’un entier naturel</h1>
                     <li>(dead)<sub>16</sub></li>
                 </ol>
             </div>
+            <div class="exercice">
+                <div id="hexaVersDecimal" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
             <h2>Conversion décimal vers hexadécimal</h2>
+            <h3>Méthode par décomposition</h3>
             <p>
-                
+                On peut cherche la décomposition selon les puissances de 16.
+                Pour cela, il faut poser la division euclidienne.<br/>
+                Exemple : représentation hexadécimale de (15 952)<sub>10</sub>
             </p>
+            <table>
+                <tr><td>16<sup>3</sup> = 4096</td><td>16<sup>2</sup> = 256</td><td>16<sup>1</sup> = 16</td><td>16<sup>0</sup> = 1</td></tr>
+                <tr id="exempleDecomposition"></tr>
+                <tr><td>3</td><td>14</td><td>5</td><td>0</td></tr>
+                <tr><td>3</td><td>e</td><td>5</td><td>0</td></tr>
+            </table>
+            <p>
+                On a donc (15 952)<sub>10</sub> = (3e50)<sub>16</sub><br/>
+                Remarque : le tableau commence à 16<sup>3</sup> car 16<sup>4</sup> = 65 536 est plus grand que le nombre à convertir.
+            </p>
+            <h3>Méthode par divisions</h3>
+            <p>
+                Cette méthode permet de ne pas avoir à pré-calculer le nombre de caractères hexadécimaux qui apparaîtrons dans la représentation hexadécimale. Les divisions successives sont toutes des divisions Euclidienne par 16, et c'est le reste qui donne la valeur des caractères hexadécimaux.<br/>
+                Exemple : représentation hexadécimale de (15 952)<sub>10</sub>
+            </p>
+            <p class=centrer id="exempleDivisions"></p>
+            <p>
+                La lecture des restes (en commençant par la dernière division posée) donne la valeur des caractères hexadécimaux.<br/>
+                On retrouve donc (15 952)<sub>10</sub> = (3e50)<sub>16</sub>
+            </p>
+            <div class="exercice">
+                Donner la représentation en base 16 des nombres suivants grâce à la méthode de votre choix :
+                <ol>
+                    <li>(37 869)<sub>10</sub></li>
+                    <li>(41 634)<sub>10</sub></li>
+                    <li>(50 131)<sub>10</sub></li>
+                    <li>(5 182)<sub>10</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <div id="decimalVersHexa" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
             <h2>Conversions entre binaire et hexadécimal</h2>
             <p>
-                
+                La base 16 est utile en informatique car elle utilise moins de caractères que le binaire
+                pour représenter un même nombre. L’énorme avantage par rapport à la base 10 est que
+                16 est une puissance de 2 ce qui rend les conversions entre binaire et hexadécimal très
+                faciles.<br/>
+                Exemple :
             </p>
+            <p>
+                (1101 0011)<sub>2</sub><br/>
+                = (1101 0000)<sub>2</sub> + (0011)<sub>2</sub><br/>
+                = (13)<sub>10</sub> × (16)<sub>10</sub> + (3)<sub>10</sub><br/>
+                = (d)<sub>16</sub> × (10)<sub>16</sub> + (3)<sub>16</sub><br/>
+                = (d0)<sub>16</sub> + (3)<sub>16</sub><br/>
+                = (d3)<sub>16</sub>
+            </p>
+            <p>
+                Comme l’illustre cet exemple, un groupe de 4 bits se code par exactement 1 caractère
+                hexadécimal.
+            </p>
+            <p>
+                Pour convertir de binaire vers l’hexadécimal, on réalise donc des groupes de
+                4 bits en partant de la droite.
+            </p>
+            <p>
+                Pour convertir de l’hexadécimal vers le binaire, on replace
+                chaque caractère hexadécimal par un groupe de 4 bits.
+            </p>
+            <div class="exercice">
+                Quelle est la représentation en hexadécimal des nombres suivants :
+                <ol>
+                    <li>(10111011)<sub>2</sub></li>
+                    <li>(10011010)<sub>2</sub></li>
+                    <li>(1110001)<sub>2</sub></li>
+                    <li>(1011011110)<sub>2</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Quelle est la représentation en binaire des nombres suivants :
+                <ol>
+                    <li>(7f7)<sub>16</sub></li>
+                    <li>(b52)<sub>16</sub></li>
+                    <li>(f719)<sub>16</sub></li>
+                    <li>(755a)<sub>16</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <div id="binaireVersHexa" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
+            <div class="exercice">
+                <div id="hexaVersBinaire" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
         </div>
         <script type="text/javascript" src="../../../script.js"></script>
+        <script type="text/javascript" src="divisionEuclidienne.js"></script>
+        <script type="text/javascript" src="Exerciseur.js"></script>
     </body>
 </html>

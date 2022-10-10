@@ -1,0 +1,27 @@
+table.division {
+    border-collapse: collapse;
+    margin: auto;
+    display: inline;
+    border: none;
+    margin: 20px;
+}
+
+table.division td {
+    border: none;
+    width: auto;
+}
+
+table.division td.borderRight {
+    border-right: 1px solid black;
+    text-align: right;
+}
+
+table.division td.suspension {
+    border-right: 1px solid black;
+    text-align: center;
+}
+
+table.division td.borderBottom {
+    border-bottom: 1px solid black;
+    min-width: 43px;
+}
