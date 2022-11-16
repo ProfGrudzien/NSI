@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Représentation binaire
+d’un entier relatif.</h1>
+            On souhaite désormais coder des entiers positifs mais aussi des entiers négatifs.
+            <h2>Première approche</h2>
+            <p>
+                Une première approche simple consisterai à indiquer dans le premier bit le signe : 0 pour un nombre positif et 1 pour un nombre négatif par exemple.
+            </p>
+            <div class="exercice">
+                Sur un octet, combien peut-on alors coder de nombres entiers relatifs ?
+            </div>
+            <div class="exercice">
+                Avec cette méthode, représenter (si possible), les nombres :
+                <ol>
+                    <li>(17)<sub>10</sub></li>
+                    <li>(-15)<sub>10</sub></li>
+                    <li>(130)<sub>10</sub></li>
+                    <li>(-1)<sub>10</sub></li>
+                </ol>
+            </div>
+            <p>
+                Gros inconvénient de cette méthode : il existe deux zéros, l’un positif (0000 0000) et l’autre négatif (1000 0000).
+            </p>
+            <h2>Complément à 2 sur 1 octet</h2>
+            <h3>Le principe</h3>
+            <p>
+                Toujours sur 1 octet, voici une deuxième méthode plus pratique à implémenter dans un micro-processeur. Cette méthode utilise le dépassement de mémoire lors de la somme de deux entiers codés sur 1 octet comme nous l’avons vu précédemment.
+            </p>
+            <div class="exercice">
+                Avec cette méthode, (121)<sub>10</sub> se code (0111 1001)<sub>2</sub> alors que (-121)<sub>10</sub> se code (1000 0111)<sub>2</sub>.<br/>
+                Vérifier que, si l'on ignore le dépassement de mémoire, on obtient bien en binaire 121 + (-121) = 0.
+            </div>
+            <h3>Conversion décimal vers binaire</h3>
+            <p>
+                Cette méthode ne change pas la façon de coder les nombres positifs (penser quand même à le représenter avec 8 bits). Pour les nombres négatifs, il suffit de retirer, en binaire, la représentation de l’opposé du nombre à 1 0000 0000.
+            <p>
+            <div class="exercice">
+                Avec cette méthode, représenter, les nombres :
+                <ol>
+                    <li>(17)<sub>10</sub></li>
+                    <li>(-15)<sub>10</sub></li>
+                    <li>(-66)<sub>10</sub></li>
+                    <li>(-1)<sub>10</sub></li>
+                </ol>
+            </div>
+            <p>
+                Mais on préférera retenir la petite routine :
+                <ul>
+                    <li>Pour les nombres positif : le premier bit est 0, le reste est la représentation habituelle.</li>
+                    <li>Pour les nombres négatifs :
+                        <ol>
+                            <li>coder sur 1 octet l'opposé du nombre.</li>
+                            <li>réécrire en inversant la valeur de chaque bit.</li>
+                            <li>ajouter 1 à ce résultat.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </p>
+            <div class="exercice">
+                Avec cette méthode, représenter, les nombres :
+                <ol>
+                    <li>(-17)<sub>10</sub></li>
+                    <li>(111)<sub>10</sub></li>
+                    <li>(-116)<sub>10</sub></li>
+                    <li>(-5)<sub>10</sub></li>
+                </ol>
+            </div>
+            <h3>Conversion binaire vers décimal</h3>
+            <p>
+                Il suffit de déconstruire la routine précédente :
+                <ul>
+                    <li>Si la représentation binaire commence par 0, le nombre est positif. La conversion binaire vers décimale des nombres entiers naturels suffit.</li>
+                    <li>Si la représentation binaire commence par 1, le nombre est négatif et :
+                        <ol>
+                            <li>on réécrit le nombre en inversant la valeur de chaque bit</li>
+                            <li>on ajoute 1 à ce résultat</li>
+                            <li>on utilise la conversion habituelle des nombres entiers naturel</li>
+                            <li>le nombre obtenu est l'opposé du nombre cherché.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </p>
+            <div class="exercice">
+                Avec cette méthode, convertir en décimal les nombres :
+                <ol>
+                    <li>(1000 0001)<sub>2</sub></li>
+                    <li>(0011 1111)<sub>2</sub></li>
+                    <li>(1011 1001)<sub>2</sub></li>
+                    <li>(1111 0010)<sub>2</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <ol>
+                    <li>Quel est le plus grand entier codé par la méthode du complément à 2 sur 1 octet ?</li>
+                    <li>Quel est le plus petit entier codé par la méthode du complément à 2 sur 1 octet ?</li>
+                    <li>Combien d’entiers sont codés par la méthode du complément à 2 sur 1 octet ?</li>
+                </ol>
+            </div>
+            <h2>Complément à 2 sur n bits</h2>
+            <p>
+                La méthode précédente se généralise en codant les entiers sur n bits avec n > 2 (la plupart du temps, n est un multiple de 8).
+            </p>
+            <div class="exercice">
+                Avec la méthode du complément à 2 sur 2 octets, représenter les nombres :
+                <ol>
+                    <li>(17)<sub>10</sub></li>
+                    <li>(-500)<sub>10</sub></li>
+                    <li>(1000)<sub>10</sub></li>
+                    <li>(-2022)<sub>10</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Quelle est la valeur en base 10 des nombres suivants représentés à l'aide de la méthode du complément à 2 sur 2 octets.
+                <ol>
+                    <li>(1000 0111 1111 0001)<sub>2</sub></li>
+                    <li>(0101 0001 0011 0001)<sub>2</sub></li>
+                    <li>(1111 1111 1111 1111)<sub>2</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                On consiste un nombre entier n > 2.
+                <ol>
+                    <li>Quel est le plus grand entier codé par la méthode du complément à 2 sur n bits ?</li>
+                    <li>Quel est le plus petit entier codé par la méthode du complément à 2 sur n bits ?</li>
+                    <li>Combien d’entiers sont codés par la méthode du complément à 2 sur n bits ?</li>
+                </ol>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+    </body>
+</html>
