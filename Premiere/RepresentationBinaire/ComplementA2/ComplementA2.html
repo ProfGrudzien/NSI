@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="../../../style.css"/>
+        <link rel="stylesheet" href="Exerciseur.css"/>
     </head>
     <body>
         <div class="main">
@@ -60,6 +61,10 @@ d’un entier relatif.</h1>
                     <li>(-5)<sub>10</sub></li>
                 </ol>
             </div>
+            <div class="exercice">
+                <div id="decimalVersBinaire" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
             <h3>Conversion binaire vers décimal</h3>
             <p>
                 Il suffit de déconstruire la routine précédente :
@@ -91,6 +96,10 @@ d’un entier relatif.</h1>
                     <li>Combien d’entiers sont codés par la méthode du complément à 2 sur 1 octet ?</li>
                 </ol>
             </div>
+            <div class="exercice">
+                <div id="binaireVersDecimal" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
             <h2>Complément à 2 sur n bits</h2>
             <p>
                 La méthode précédente se généralise en codant les entiers sur n bits avec n > 2 (la plupart du temps, n est un multiple de 8).
@@ -115,12 +124,13 @@ d’un entier relatif.</h1>
             <div class="exercice">
                 On consiste un nombre entier n > 2.
                 <ol>
-                    <li>Quel est le plus grand entier codé par la méthode du complément à 2 sur n bits ?</li>
-                    <li>Quel est le plus petit entier codé par la méthode du complément à 2 sur n bits ?</li>
-                    <li>Combien d’entiers sont codés par la méthode du complément à 2 sur n bits ?</li>
+                    <li>Quel est le plus grand entier codé par la méthode du complément à 2 sur n bits&nbsp;?</li>
+                    <li>Quel est le plus petit entier codé par la méthode du complément à 2 sur n bits&nbsp;?</li>
+                    <li>Combien d’entiers sont codés par la méthode du complément à 2 sur n bits&nbsp;?</li>
                 </ol>
             </div>
         </div>
         <script type="text/javascript" src="../../../script.js"></script>
+        <script type="text/javascript" src="Exerciseur.js"></script>
     </body>
 </html>
