@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Mise en page avec CSS</h1>
+            <p>
+                Le langage HTML permet, grâce aux balises, de définir la mise en page.
+                Des balises sont par exemples conçus pour gérer la police, la taille du caractère et la couleur d’un texte. 
+                Cependant, si l’on souhaite appliquer la mise mise en page à tous les éléments p, cela devient vite long à écrire et source d’erreurs.
+                Pire, si l’on change d’avis, il faut manuellement modifier les balises une par une !
+            </p>
+            <p>
+                C’est pour cela que la mise en page est souvent délégué à un autre langage conçu spécialement pour gérer ces problématiques : le langage CSS (Cascading Style Sheets).
+            </p>
+            <h2>Mise en place de règles CSS</h2>
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Préparation des fichiers
+                        <ol>
+                            <li>Télécharger les fichiers <a href="haiku.html" download>haiku.html</a> et <a href="crows.jpg" download>crows.jpg</a> et <b>enregistrer les fichiers dans le même dossier</b>.</li>
+                            <li>Dans ce même dossier, créer un fichier texte nommé <mark class="code">style.css</mark></li>
+                            <li>
+                                A la fin de l’en-tête du fichier haiku.html, ajouter la ligne
+                                <div class="algo">
+                                    <input type="button" class="copier" value="📑" title="copier">
+                                    <p class="code">
+                                        &lt;link rel="stylesheet" href="style.css"/&gt;
+                                    </p>
+                                </div>
+                                qui indique au navigateur quel fichier CSS utiliser pour la mise en page.
+                            </li>
+                            <li>
+                                Changement de la couleur d’arrière plan.<br/>
+                                La couleur de l’arrière plan affecte toute la page web.
+                                C’est pourquoi cet attribut dépend de la balise &lt;body&gt;.
+                                <ol>
+                                    <li>
+                                        Dans le fichier <mark class="code">style.css</mark> ajouter les lignes :
+                                        <div class="algo">
+                                            <input type="button" class="copier" value="📑" title="copier">
+                                            <p class="code">
+                                                body {<br/>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;background-color: #00ff00;<br/>
+                                                }
+                                            </p>
+                                        </div>    
+                                    </li>
+                                    <li>
+                                        Ouvrir le fichier <mark class="code">haiku.html</mark> avec un navigateur.<br/>
+                                        De quelle couleur est l’arrière plan ?
+                                    </li>
+                                    <li>Dans le fichier <mark class="code">style.css</mark> modifier la valeur <mark class="code">#00ff00;</mark> par <mark class="code">#ff8888;</mark>.</li>
+                                    <li>
+                                        Actualiser la page <mark class="code">haiku.html</mark> dans le navigateur (touche F5).<br/>
+                                        De quelle couleur est l'arrière-plan ?
+                                    </li>
+                                    <li>A l’aide du site <a href="https://htmlcolorcodes.com/fr/" target="_blank">https://htmlcolorcodes.com/fr/</a>, appliquer un arrière plan de couleur brun-orangé.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Changement de la police.<br/>
+                                Rappel : le titre est contenu dans une balise &lt;h1&gt;.
+                                <ol>
+                                    <li>
+                                        Au tout début du fichier style.css, ajouter les lignes :
+                                        <div class="algo">
+                                            <input type="button" class="copier" value="📑" title="copier">
+                                            <p class="code">
+                                                @import url('https://fonts.googleapis.com/css2?family=Ranchers');<br/>
+                                                @import url('https://fonts.googleapis.com/css2?family=Sacramento');
+                                            </p>
+                                        </div> 
+                                        Ces lignes permettent d’importer des polices fournies par Google. Vous en trouverez plus à l'adresse <a href="https://fonts.google.com/" target="_blank">https://fonts.google.com/</a>.
+                                    </li>
+                                    <li>
+                                        Dans le fichier <mark class="code">style.css</mark> ajouter les lignes :
+                                        <div class="algo">
+                                            <input type="button" class="copier" value="📑" title="copier">
+                                            <p class="code">
+                                                h1 {<br/>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;font-family: Ranchers;<br/>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;font-size: 18pt;<br/>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;color: #ff0000;<br/>
+                                                }
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li>Actualiser la page <mark class="code">haiku.html</mark> pour visualiser les changements.</li>
+                                    <li>Ajouter au fichier <mark class="code">style.css</mark> les lignes nécessaires pour que les paragraphes (&lt;p&gt;)
+soient en police Sacramento, en taille 24 pt et en vert foncé.</li>
+                                </ol>
+                            </li>
+                            <li>
+                                Bordure arrondie de l’image.
+                                <ol>
+                                    <li>
+                                        Dans le fichier <mark class="code">style.css</mark> ajouter les lignes :
+                                        <div class="algo">
+                                            <input type="button" class="copier" value="📑" title="copier">
+                                            <p class="code">
+                                                img {<br/>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;border-radius: 20px;<br/>
+                                                }
+                                            </p>
+                                        </div></li>
+                                    <li>Actualiser la page <mark class="code">haiku.html</mark> pour visualiser les changements.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            <h2>Utiliser des classes</h2>
+            <p>
+                Le langage CSS permet aussi de manipuler des classes.
+                Il s’agit de définir un style qui s’appliquera à tous les éléments qui auront cette classe dans leur paramètre.
+                Cela permet aussi d’appliquer un style différent à deux paragraphes par exemples.
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>
+                        Préparation des fichiers.
+                        <ol>
+                            <li>Télécharger les fichiers <a href="oeuf.html" download>oeuf.html</a> et <a href="style_oeuf.css" download>style_oeuf.css</a> et <b>enregistrer les fichiers dans le même dossier</b>.</li>
+                            <li>Ouvrir le fichier <mark class="code">oeuf.html</mark> dans le navigateur.</li>
+                            <li>Ouvrir les fichiers <mark class="code">oeuf.html</mark> et <mark class="code">style_oeuf.css</mark> avec un éditeur de texte.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Premiers changement de style.
+                        <ol>
+                            <li>D’après le fichier <mark class="code">style_oeuf.css</mark>, comment devrait-être le titre du poème ?</li>
+                            <li>Ce n’est pas le cas, pourquoi ? Appliquer les changements nécessaires.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Appliquer une classe.
+                        <ol>
+                            <li>Le fichier <mark class="code">style_oeuf.css</mark> décrit le style de la classe poeme. Quelle syntaxe permet de créer une classe ?</li>
+                            <li>Appliquons ce style en remplaçant la 1ère balise <mark class="code">&lt;div&gt;</mark> par <mark class="code">&lt;div class="poeme"&gt;</mark> dans le fichier <mark class="code">oeuf.html</mark></li>
+                            <li>Actualiser la page <mark class="code">oeuf.html</mark> dans le navigateur. Que s’est-il passé ?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Créer des classes.
+                        <ol>
+                            <li>Déclarer trois classes <mark class="code">bleu</mark>, <mark class="code">jaune</mark> et <mark class="code">blanc</mark> dans le fichier <mark class="code">style_oeuf.css</mark> qui fixent la couleur du texte en respectivement bleu, jaune et blanc.</li>
+                            <li>Réaliser les changements nécessaires dans le fichier <mark class="code">oeuf.html</mark> pour appliquer le style adéquat aux trois strophes.</li>
+                            <li>Actualiser la page dans le navigateur pour vérifier vos changements.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Ajout d’une image.
+                        <ol>
+                            <li>Ajouter une image d’œuf en dessous du poème.</li>
+                            <li>Modifier le CSS pour arrondir les angles de cette image.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Ma première page en HTML</h1>
+            <p>
+                Depuis la création des pages web par Tim Berners-Lee, les pages sont décrites uniquement par du texte.
+                Le texte précise à la fois le contenu du document, mais aussi sa mise en page.
+                Cela signifie que l’on peut écrire un site internet uniquement grâce à un éditeur de texte. <br/>
+                Nous utiliserons donc 2 types de logiciel :
+                <ul>
+                    <li><b>un éditeur de texte</b> qui permet de crééer et modifier le site. Exemples : Notepad++, Bloc-notes, Gedit, TextEdit...</li>
+                    <li><b>un navigateur web</b> qui permet de visualiser le site. Exemples : Google Chrome, Microsoft Edge, Modzilla Firefox, Safari...</li>
+                </ul>
+            </p>
+            <h2>Premier essai</h2>
+            <div class="exercice">
+                <ol>
+                    <li>Ouvrir un éditeur de texte.</li>
+                    <li>
+                        Taper le contenu suivant
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                Sur une branche morte<br/>
+                                Les corbeaux se sont perchés<br/>
+                                Soir d’automne.
+                            </p>
+                        </div>
+                    </li>
+                    <li>Enregistrer le fichier sous le nom <mark class="code">premier_site.html.</mark></li>
+                    <li>Ouvrez ce fichier avec un navigateur.</li>
+                    <li>Le navigateur affiche-t-il bien ce qui est demandé ?</li>
+                </ol>
+            </div>
+            <p>
+                Le navigateur n’a appliqué aucune mise en page,
+                pas même le retour à la ligne.<br/>
+                Toute la mise en page doit donc être décrite dans le fichier HTML.
+            </p>
+            <h2>Ma première page</h2>
+            <p>
+                Pour différencier le texte du contenu du texte qui décrit la mise en page, 
+                le langage HTML (HyperTexte Markup Laguage) utilise des balises.
+                Ces balises consistent en des mots clés encadrés par des chevrons (&lt; et &gt;), et souvent associés par paires.
+                Voici quelques exemples de balises :
+                <ul>
+                    <li>&lt;p&gt; marque le début d’un paragraphe &lt;/p&gt; marque la fin du paragraphe.</li>
+                    <li>&lt;a&gt; marque le début d’un lien hypertexte &lt;/a&gt; marque la fin du lien.</li>
+                    <li>
+                        &lt;h1&gt; marque le début d’un titre de niveau 1 (très gros titre) &lt;/h1&gt; en marque la fin.
+                        Il existe 6 niveaux de titres, de &lt;h1&gt; à &lt;h6&gt;.
+                    </li>
+                    <li>&lt;img&gt; permet d’insérer une image.</li>
+                </ul>
+            </p>
+            <p>
+                Le fichier HTML est aussi découpé en deux parties, une en-tête (encadré par les balises &lt;head&gt; et &lt;/head&gt;) qui contient des informations sur le document et un corps (encadré par les balises &lt;body&gt; et &lt;/body&gt;) qui contient ce que doit afficher le navigateur.
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>Télécharger les fichiers <a href="haiku.html" download>haiku.html</a> et <a href="crows.jpg" download>crows.jpg</a> et <b>enregistrer les fichiers dans le même dossier</b>.</li>
+                    <li>Ouvrir le fichier <mark class="code">haiku.html</mark> avec l’éditeur de texte.</li>
+                    <li>Identifier l’en-tête de cette page HTML. Combien de ligne compose cet en-tête&nbsp;?</li>
+                    <li>
+                        Identifier le corps de cette page HTML.
+                        <ol>
+                            <li>Combien de paragraphe sont déclarés&nbsp;?</li>
+                            <li>Comment le titre est-il identifiable dans ce fichier HTML&nbsp;?</li>
+                            <li>Quel mot-clé permet de donner le nom du fichier de l’image à insérer&nbsp;?</li>
+                            <li>Quel mot-clé permet de donner l’URL à afficher lorsque l’on clique sur le lien&nbsp;?</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Ouvrir ce fichier avec un navigateur.
+                        <ol>
+                            <li>Quelle est la différence de mise en page entre le texte compris dans des balises
+&lt;h1&gt; et le texte dans des balises &lt;p&gt;&nbsp;?</li>
+                            <li>Pourquoi le poème est-il sur trois lignes&nbsp;?</li>
+                            <li>Vers quel site mène le seul lien hypertexte de cette page&nbsp;?</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            <div>
+                En s’aidant de la page HTML haiku.html,
+                écrire un fichier monhaiku.html qui contient un haïku d’un autre auteur,
+                accompagné d’une image et d’un lien hypertexte menant à la page wikipédia de son auteur.
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+    </body>
+</html>
