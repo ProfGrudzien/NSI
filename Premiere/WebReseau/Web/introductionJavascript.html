@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Introduction à JavaScript</h1>
+            <p>
+                L’objectif de cette activité est de retravailler les bases du langages CSS à travers un tableau de Mondrian puis d'aborder pour la première fois le langage JavaScript.
+            </p>
+            <h2>Le style avec CSS</h2>
+            <div class="exercice">
+                <ol>
+                    <li>Télécharger et désarchiver le fichier <a href="Mondrian.zip">Mondrian.zip</a></li>
+                    <li>Le fichier style a été altéré. Rétablissez la bonne correspondance entre le nom des classes et la valeur de la couleur de fond.</li>
+                    <li>Maintenant que votre fichier style est opérationnel, modifiez le fichier html pour que l’image obtenu corresponde au fragment du tableau de Mondrian donné dans le fichier Mondrian.jpeg.</li>
+                </ol>
+            </div>
+            <h2>Découverte de JavaScript</h2>
+            <p>Le but est d’utiliser des fonctions, des listes, des boucles et l’interaction d’une page web avec le langage JavaScript. Dans cet exercice nous ne modifierons pas le fichier en langage CSS.</p>
+            <div class="exercice">
+                Nous allons ajouter un peu d'interaction au tableau de Mondrian grâce au langage JavaScript. L'objectif est de laisser la possibilité à l'utilisateur de changer le tableau simplement en cliquant sur les carrés et sur les bordures. Comme tout tableau de Mondrian, nous utiliserons les couleurs : blanc, jaune, rouge, bleu et noir.
+                <ol>
+                    <li><b>Dans le même dossier</b> que les fichiers de l'exercice précédent, créer un nouveau fichier texte brut Mondrian.js</li>
+                    <li>
+                        Dans le fichier mondrian.js recopier et modifier la fonction <mark class="code">changerCouleur(div)</mark> ci-dessous :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                const couleurs = ["_____", "_____", "_____", "_____", "_____"]<br/>
+                                function changerCouleur(div){<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;const oldIndex = couleurs.indexOf(div.className);<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;const newIndex = (oldIndex + 1) % 5;<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;div._____ = couleurs[_____]<br/>
+                                }
+                            </p>
+                        </div>
+                    </li>
+                    <li>Dans le fichier mondrian.js recopier et compléter la fonction <mark class="code">changerBordure(div)</mark> ci-dessous :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                function changerBordure(div) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if (div._____ == "sep") {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;div._____ = "sep invisible";<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;_____ {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;div._____ = "_____";<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                }
+                            </p>
+                        </div>
+                    </li>
+                    <li>Nous allons maintenant préparer un écouter d'événenement et une fonction pour gérer les clics. Cela permet d'ajouter de l'interaction sans modifier la structure du fichier html. Recopier et compléter les lignes suivantes à la suite des deux premières fonctions :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                function gererClic(event) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;const div = event.target;<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;if (div.classList[0] == "sep") {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____(div);<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;else if (couleurs.indexOf(div.className) > -1) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____(div);<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                }<br/>
+                                document.addEventListener("click", gererClic);
+                            </p>
+                        </div>
+                    </li>
+                    <li>Dans votre fichier Mondrian.html, insérer juste avant la balise <mark class="code">&lt;/body&gt;</mark> la ligne suivante :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                &lt;script type="text/javascript" src="Mondrian.js"&gt;&lt;/script&gt;
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+            <p>Le langage JavaScript permet aussi de créer et d'ajouter des éléments à une structure HTML. Cela permet de générer un tableau de Mondrian de dimensions choisies.</p>
+            <div class="exercice">
+                <ol>
+                    <li>Toujours dans le même dossier, télécharger le fichier <a href="MondrianAuto.html" download>MondrianAuto.html</a></li>
+                    <li>Créer aussi un nouveau fichier texte brut <mark class="code">GenerateurMondrian.js</mark></li>
+                    <li>
+                        Copier-coller dans ce fichier les deux lignes suivantes qui permettront de facilement choisir les dimensions du tableau :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                const nombresLignes = 5;<br/>
+                                const nombresColonnes = 8;
+                            </p>
+                        </div>
+                    </li>
+                    <li>Dans le fichier GenerateurMondrian.js recopier et compléter la fonction <mark class="code">genererLigne()</mark> ci-dessous :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                function genererLigne() {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;const ligne = document.createElement("div");<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;ligne.className = "ligne";<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;for (let i=0; i&lt;nombresColonnes; i++) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const carre = document.createElement("div");<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;carre._____ = "blanc";<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ligne.appendChild(carre);<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const separateur = document.createElement("_____");<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;separateur._____ = "_____";<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_____._____(_____);<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;document.body.appendChild(ligne)<br/>
+                                }
+                            </p>
+                        </div>
+                    </li>
+                    <li>Ecrire une fonction <mark class="code">genererFilet()</mark> qui permet de générer les blocs servant de bordures horizontales dans le tableau de Mondrian.</li>
+                    <li>Il est temps de faire appel à ces deux fonctions pour créer le tableau. Recopier et compléter les lignes ci-dessous :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                for (let i=0; i&lt;_____; i++) {<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;genererLigne();<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;genererFilet();<br/>
+                                }
+                            </p>
+                        </div>
+                    </li>
+                    <li>Vérifier que la construction du tableau de Mondrian se passe bien.</li>
+                </ol>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+    </body>
+</html>
