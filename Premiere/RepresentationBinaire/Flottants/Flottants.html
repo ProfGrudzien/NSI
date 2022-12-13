@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+        <link rel="stylesheet" href="Exerciseur.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Représentation approximative des
+nombres réel en binaire</h1>
+            <h2>Ecriture à virgule flottante</h2>
+            <p>
+                Par analogie avec les nombres décimaux et les puissances de 10, on peut écrire un nombre à virgule en notation binaire en utilisant les puissances négatives de 2.<br/>
+                Exemple :
+            </p>
+            <p class="centrer">
+                (<font color="red">11</font>,<font color="blue">0101</font>)<sub>2</sub> = <font color="red">2<sup>1</sup></font> + <font color="red">2<sup>0</sup></font> + <font color="blue">2<sup>-2</sup></font> + <font color="blue">2<sup>-4</sup></font> = 3,3125
+            </p>
+            <p>
+                Cette méthode convient très bien pour les nombres qui ne sont ni trop proche de 0, ni trop grand. Dans les autres cas, la notation en écriture scientifique permet d’optimiser l’écriture de ces nombres en faisant intervenir une puissance.<br/>
+                Exemple :
+            </p>
+            <p class="centrer">
+                (0,00101)<sub>2</sub> = (1,01)<sub>2</sub> &times; 2<sup>-3</sup>
+            </p>
+            <p>
+                Remarque : en binaire, l'écriture scientifique d'un nombre non nul commence toujours par un «1».
+            </p>
+            <div class="exercice">
+                Les nombres suivants sont représentés en binaire grâce à l'écriture à virgule flottante. Donner leur écriture décimale.
+                <ol>
+                    <li>(1,010101)<sub>2</sub> &times; 2<sup>3</sup></li>
+                    <li>(1,1011011)<sub>2</sub> &times; 2<sup>4</sup></li>
+                    <li>(1,00101)<sub>2</sub> &times; 2<sup>-5</sup></li>
+                    <li>(1,01100111)<sub>2</sub> &times; 2<sup>-7</sup></li>
+                <ol>
+            </div>
+            <div class="exercice">
+                Utiliser cette écriture pour représenter les nombres en écriture décimale suivants :
+                <ol>
+                    <li>(21,3125)<sub>10</sub></li>
+                    <li>(18,25)<sub>10</sub></li>
+                    <li>(109,5)<sub>10</sub></li>
+                    <li>(0,01484375)<sub>10</sub></li>
+                </ol>
+            </div>
+            <h2>Nombres à virgule flottante : les flottants</h2>
+            <p>
+                Vocabulaire : Dans l’écriture (0,00101)<sub>2</sub> = (1,01)<sub>2</sub> &times; 2<sup>-3</sup> , on appelle mantisse le nombre (1,01)<sub>2</sub>.
+            </p>
+            <p>
+                Pour stocker en mémoire un nombre décimal non nul, il faut enregistrer :
+                <ul>
+                    <li>son signe (positif ou négatif)</li>
+                    <li>sa mantisse (ou du moins la partie décimale de cette mantisse car elle commence par 1,)</li>
+                    <li>son exposant</li>
+                </ul>
+            </p>
+            <p>
+                Il se pose alors un premier problème : la mantisse d’un nombre décimal peut être infinie en binaire.
+                Ce problème existait déjà en décimal, seuls les nombres décimaux peuvent s’écrire en utilisant la virgule flottante.
+                Par exemple, &frac13; ne peut pas être écrit en virgule flottante.
+            </p>
+            <p>
+                La solution retenue consiste à arrondir cette mantisse pour l’écrire sur un nombre fixe de bits. La norme IEEE-754 prévoit la longueur à utiliser :
+            </p>
+            <table>
+                <tr><th>nom</th><th>encodage</th><th>signe</th><th>mantisse</th><th>exposant</th></tr>
+                <tr><td>simple précision</td><td>32 bits</td><td>1 bit</td><td>23 bits</td><td>8 bits</td></tr>
+                <tr><td>simple précision</td><td>64 bits</td><td>1 bit</td><td>52 bits</td><td>11 bits</td></tr>
+            </table>
+            <p>
+                Cet arrondi peut générer des erreurs d’arrondis.
+                Par exemple, en Python, <mark class="code">0.1 + 0.2 == 0.3</mark> retourne <mark class="code">False</mark> !
+            </p>
+            <p>
+                Il faut donc toujours être très prudent lorsque l’on manipule de tels nombres.
+                Si possible, on n’utilise que des nombres entiers en travaillant par exemple en centimes pour ce qui concerne les transactions financières.
+            </p>
+            <p>
+                Il existe un procédé simple pour trouver la mantisse binaire et l’exposant d’un nombre en écriture décimale :
+                <ol>
+                    <li>encoder en binaire la partie entière : on obtient le début de la mantisse.</li>
+                    <li>
+                        utiliser la partie décimale pour amorcer la boucle suivante :
+                        <ul>
+                            <li>multiplier par 2.</li>
+                            <li>la suite de la mantisse est égale à la partie entière du résultat.</li>
+                            <li>récupérer uniquement la partie décimale pour continuer le processus ou s’arrêter si elle vaut 0.</li>
+                        </ul>
+                    </li>
+                    <li>on détermine l’exposant</li>
+                </ol>
+            </p>
+            <p>
+                Exemple :
+                <ol>
+                    <li>(5)<sub>10</sub> = (101)<sub>2</sub></li>
+                    <li>
+                        <ul>
+                            <li>0,5625 &times; 2 = 1,125</li>
+                            <li>la mantisse est 101,1...</li>
+                            <li>on continue avec 0,125.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>0,125 &times; 2 = 0,25</li>
+                            <li>la mantisse est 101,10...</li>
+                            <li>on continue avec 0,25.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>0,25 &times; 2 = 0,5</li>
+                            <li>la mantisse est 101,100...</li>
+                            <li>on continue avec 0,5.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>0,5 &times; 2 = 1</li>
+                            <li>la mantisse est 101,1001...</li>
+                            <li>on s'arrête car la partie décimale est égale à 0.</li>
+                        </ul>
+                    </li>
+                    <li>(5,5625)<sub>10</sub> = (101,1001)<sub>2</sub> = (1,011001)<sub>2</sub> × 2<sup>2</sup></li>
+                </ol>
+                La mantisse est 1,011001, l’exposant est 2.
+            </p>
+            <div class="exercice">
+                Déterminer la mantisse et l’exposant des écritures binaire suivantes :
+                <ol>
+                    <li>110110,1101</li>
+                    <li>1,11011</li>
+                    <li>0,11011</li>
+                    <li>0,000101101</li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Déterminer la mantisse et l’exposant des écritures décimale suivantes :
+                <ol>
+                    <li>80,625</li>
+                    <li>0,078125</li>
+                    <li>55,6875</li>
+                    <li>12,009765625</li>
+                </ol>
+            </div>
+            <h2>Encodage des flottants</h2>
+            <h3>Le signe</h3>
+            <p>
+                La norme IEEE-754 n’utilise pas de complément à 2 pour coder un nombre négatif. Un bit de signe est donc introduit pour encoder les nombres négatifs. Celui-ci vaut <mark class="code">0</mark> si le nombre est positif, <mark class="code">1</mark> s’il est négatif.
+            </p>
+            <h3>La mantisse</h3>
+            <p>
+                En écriture binaire à virgule flottante, pour un nombre non nul, la mantisse commence toujours par «1,». Seuls les bits après la virgule sont donc encodés. Si le nombre de bits après la virgule est inférieur au nombre de bits réservés par la norme IEEE-754, des <mark class="code">0</mark> sont ajoutés <b>à droite</b>.    
+            </p>
+            <p>Exemple : La mantisse 1,101101 sera encodé en simple précision par 101101<font color="red">00000000000000000</font>.</p>
+            <h3>L’exposant</h3>
+            <p>
+                L’encodage des flottants doit permettre d’encoder aussi bien des grands nombres que des nombres très proches de 0 (avec des exposants négatifs). Encore une fois, la norme IEEE-754 n’utilise pas de complément à 2 pour coder un exposant négatif.
+            </p>
+            <p>
+                Pour coder des exposant négatifs, la norme IEEE-754 prévoit un décalage :
+                <ul>
+                    <li>En simple précision, on ajoute 127 à l’exposant avant de le convertir en binaire.</li>
+                    <li>En simple précision, on ajoute 1023 à l’exposant avant de le convertir en binaire.</li>
+                </ul>
+            </p>
+            <p>
+                Exceptions : Les valeurs extrêmes de l’exposant sont réservés à des cas particulier.
+                <ul>
+                    <li>exposant et mantisse nuls : +zéro et -zéro (la valeur approchée est nulle, mais la valeur exacte peut être négative ou positive)</li>
+                    <li>exposant nul et mantisse non nul : nombres dénormalisés</li>
+                    <li>exposant maximum et mantisse nulle : +infini et -infini</li>
+                    <li>exposant maximum et mantisse non nulle : NaN (Not a Number)</li>
+                </ul>
+            </p>
+            <h3>Exemple complet</h3>
+            <p>
+                On souhaite coder 5,5625 en simple précision.
+                On a vu que (5,5625)<sub>10</sub> = (101,1001)<sub>2</sub> = (1,011001)<sub>2</sub> × 2<sup>2</sup>
+                <ul>
+                    <li>Le bit de signe est <font color="orange">0</font></li>
+                    <li>La mantisse est 1,011001, on encode <font color="blue">01100100000000000000000</font></li>
+                    <li>L’exposant est 2, on encode (2 + 127)<sub>10</sub> = (129)<sub>10</sub> = (<font color="red">10000001</font>)<sub>2</sub></li>
+                </ul>
+                Donc, en simple précision, 5,125 est encodé par :
+            </p>
+            <p class="centrer">
+                 <font color="orange">0</font><font color="red">10000001</font><font color="blue">01100100000000000000000</font>
+            </p>
+            <h3>Exercices</h3>
+            <div class="exercice">
+                Les nombres suivants sont encoder en binaire en simple précision. Quelles sont leurs valeurs décimales ?
+                <ol>
+                    <li>(01001010 00100110 00000000 00000000)<sub>2</sub></li>
+                    <li>(11001001 01000010 00000000 00000000)<sub>2</sub></li>
+                    <li>(00001010 00011001 00000000 00000000)<sub>2</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <div id="flottantsEnDecimal" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
+            <div class="exercice">
+                Encoder en simple précision les nombres suivants :
+                <ol>
+                    <li>(2540,28125)<sub>10</sub></li>
+                    <li>(−127,625)<sub>10</sub></li>
+                    <li>(0,005859375)<sub>10</sub></li>
+                </ol>
+            </div>
+            <div class="exercice">
+                <div id="flottantsEnBinaire" class="exerciseur"></div>
+                <p class="adroite"><input type=button value=" ↻ " class="reload"></p>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+        <script type="text/javascript" src="Exerciseur.js"></script>
+    </body>
+</html>
