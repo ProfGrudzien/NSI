@@ -20,6 +20,10 @@
     margin:0;
 }
 
+.exerciseur input[type=text].long{
+    width: 450px;
+}
+
 input[type=button], input[type=submit] {
     height: 50px;
 }
@@ -56,7 +60,6 @@ div.soustractions {
 }
 
 .exerciseur p.left {
-    width: 100%;
-    text-align: left;
-    padding-left: 10px;
+    text-align: justify;
+    padding: 0px 10px;
 }
