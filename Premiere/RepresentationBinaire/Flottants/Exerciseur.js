@@ -75,25 +75,25 @@ function flottantsEnDecimal(event) {
     form.innerHTML = `
         ${form.sujet}
         <label>Ce nombre est</label>
-        <select name="signe" id="exo1Signe">
+        <select id="exo1Signe">
             <option value="1">positif</option>
             <option value="-1">négatif</option>
         </select>
         <span id="exo1VerdictSigne"></span>
         <br/>
         <label>La mantisse (en binaire) est :</label>
-        <input type="text" name="mantisse" id="exo1Mantisse"></input>
+        <input type="text" id="exo1Mantisse"></input>
         <span id="exo1VerdictMantisse"></span>
         <br/>
         <label>L'exposant (en décimal) est :</label>
-        <input type="number" name="exposant" id="exo1Exposant"></input>
+        <input type="number" id="exo1Exposant"></input>
         <span id="exo1VerdictExposant"></span>
         <br/>
         <label>La valeur en base 10 de ce nombre est :</label>
-        <input type="number" name="exposant" id="exo1Decimal"></input>
+        <input type="number" id="exo1Decimal"></input>
         <span id="exo1VerdictDecimal"></span>
         <input type="submit" value="Vérifier"/>
-        <div class="correction" name="correction"><span class="aDroite"><input type="button" value="Correction"/></span></div>
+        <div class="correction" ><span class="aDroite"><input type="button" value="Correction"/></span></div>
     `;
     form.handleEvent = (event) => {
         if (event.target.type == "submit") {
@@ -110,15 +110,14 @@ function flottantsEnDecimal(event) {
             verdictMantisse.textContent = (reponseMantisse == "1,"+form.mantisse) ? "Vrai" : "Faux"
             verdictExpossant.textContent = (document.getElementById("exo1Exposant").value == form.exposant) ? "Vrai" : "Faux"
             verdictDecimal.textContent = (document.getElementById("exo1Decimal").value == form.base10) ? "Vrai" : "Faux"
-            console.log(form.base10)
         }
         if (event.target.type == "button") {
             const label = event.target.parentNode.parentNode
             const form = label.parentNode
-            var txtReponse = "<p class='left'>On commence par séparer les bits en trois groupes pour retrouver les informations sur le ligne, l'exposant et sur la mantisse : </p>"
+            var txtReponse = "<p class='left'>On commence par séparer les bits en trois groupes pour retrouver les informations sur le signe, l'exposant et sur la mantisse : </p>"
             txtReponse += `<p class="centrer">${afficherBinaire(form.base2).slice(0,2) + '|'+afficherBinaire(form.base2).slice(2,11) + '|' + afficherBinaire(form.base2).slice(11)}</p>`
             txtReponse += `<p class='left'>Comme le premier bit est ${form.signe==1?0:1}, le nombre est ${form.signe==1?"positif":"négatif"}.</p>`
-            txtReponse += `<p class='left'>L'exposant est codé par ${afficherBinaire(form.base2.slice(1,9))} ce qui donne ${form.exposant+127} en décimal. En utilisant le décallage de +127 utilisé lors du codage de l'exposant, on retrouve un exposant égal à ${form.exposant}.</p>`
+            txtReponse += `<p class='left'>L'exposant est codé par ${afficherBinaire(form.base2.slice(1,9))} ce qui donne ${form.exposant+127} en décimal. En utilisant le décallage de +127 utilisé lors du codage de l'exposant, on retrouve un exposant égal à&nbsp;${form.exposant}.</p>`
             txtReponse += `<p class='left'>La mantisse est codée par ${afficherBinaire(form.base2.slice(9))}. Elle est donc égale (en binaire) à 1,${form.mantisse} ce qui correspond à :</p>`
             txtReponse += `<p class='centrer'>${sommeMantisse(form.mantisse)}</p>`
             txtReponse += "<p class='left'>Le nombre cherché est donc :</p>"
@@ -149,28 +148,28 @@ function flottantsEnBinaire(event) {
     form.innerHTML = `
         ${form.sujet}
         <label>Le signe sera codé en binaire par</label>
-        <input type="text" name="mantisse" id="exo2Signe"></input>
+        <input type="text" id="exo2Signe"></input>
         <span id="exo2VerdictSigne"></span>
         <br/>
         <label>La mantisse (en binaire) est :</label>
-        <input type="text" name="mantisse" id="exo2Mantisse"></input>
+        <input type="text" id="exo2Mantisse"></input>
         <span id="exo2VerdictMantisse"></span>
         <br/>
         <label>L'exposant (en décimal) est :</label>
-        <input type="number" name="exposant" id="exo2Exposant"></input>
+        <input type="number" id="exo2Exposant"></input>
         <span id="exo2VerdictExposant"></span>
         <br/>
         <label>L'exposant sera codé en binaire par :</label>
-        <input type="text" name="exposant" id="exo2CodageExposant"></input>
+        <input type="text" id="exo2CodageExposant"></input>
         <span id="exo2VerdictCodageExposant"></span>
         <br/>
         <label>Ce nombre sera codé en binaire par :</label>
         <p class="centrer">
-            <input type="text" name="exposant" id="exo2Binaire" class="long"></input>
+            <input type="text" id="exo2Binaire" class="long"></input>
             <span id="exo2VerdictBinaire"></span>
         </p>
         <p class="centrer"><input type="submit" value="Vérifier"/></p>
-        <div class="correction" name="correction"><span class="aDroite"><input type="button" value="Correction"/></span></div>
+        <div class="correction"><span class="aDroite"><input type="button" value="Correction"/></span></div>
     `;
     form.handleEvent = (event) => {
         if (event.target.type == "submit") {
@@ -212,10 +211,10 @@ function flottantsEnBinaire(event) {
                 }
                 txtReponse += `</ul>Ce nombre s'écrit donc ${parseInt(Math.abs(form.base10)).toString(2)+partieDecimaleMantisse} en binaire.`
                 txtReponse += "</li></ul></p>"
-                txtReponse += `<p class='left'>Comme ${parseInt(Math.abs(form.base10)).toString(2)+partieDecimaleMantisse} = 1,${form.mantisse} &times; 2<sup>${form.exposant}</sup>, la mantisse est 1,${form.mantisse} et l'exposant est ${form.exposant}.</p>`
+                txtReponse += `<p class='left'>Comme ${parseInt(Math.abs(form.base10)).toString(2)+partieDecimaleMantisse} = 1,${form.mantisse} &times; 2<sup>${form.exposant}</sup>, la mantisse est 1,${form.mantisse} et l'exposant est&nbsp;${form.exposant}.</p>`
             }
             txtReponse += `<p class='left'>Seule la partie après la virgule sera encodé en binaire, complétée pour atteindre 23 bits. On encode donc ${afficherBinaire(formaterMantisse(form.mantisse))}.</p>`
-            txtReponse += `<p class='left'>Un décallage est appliqué avant d'encoder l'exposant en binaire. On encode donc ${form.exposant} + 127 = ${form.exposant + 127} et on obtient ${afficherBinaire(formaterExposant(form.exposant))}.</p>`
+            txtReponse += `<p class='left'>Un décallage est appliqué avant d'encoder l'exposant en binaire. On encode donc ${form.exposant}&nbsp;+&nbsp;127&nbsp;=&nbsp;${form.exposant + 127} et on obtient ${afficherBinaire(formaterExposant(form.exposant))}.</p>`
             txtReponse += "<p class='left'>Il ne reste plus qu'a assembler dans l'ordre : le signe puis l'exposant et enfin la mantisse. On obtient :</p>"
             txtReponse += `<p class='centrer'>${afficherBinaire(form.base2)}</p>`
             label.innerHTML = txtReponse
