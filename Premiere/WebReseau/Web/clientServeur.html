@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Interactions clients-serveur</h1>
+            <p>
+                L'utilisation du web est construit autour des interactions entre client (le navigateur du visiteur du site) et le serveur. Il appartient au développeur du site de choisir si le code informatique qu'il écrit doit être exécuté par le client ou par le serveur.
+            </p>
+            <h2>Côté client</h2>
+            <p>Le langage le plus répandu est JavaScript. L'avantage de la programmation côté client est qu'elle n'utilise pas la puissance de calcul du serveur mais celle de l'appareil de le l'utilisateur.</p>
+            <p>
+                Cependant, le code source du programme à exécuter côté client peut être modifié par l'utilisateur. Les résultats de ces calculs doivent donc être interprété avec prudence. On utilise donc en générale la programmation côté client pour de la mise en page ou contrôler des données avant de les envoyer au serveur.
+            </p>
+            <h2>Côté serveur</h2>
+            <p>Le langage le plus répandu est PHP même si de nos jours de plus en plus de serveurs sont écrits dans des langages plus moderne : Python, JavaScript... Le code écrit côté serveur ne peut pas être visualisé ou modifié par l'utilisateur. Il n'y a donc plus de soucis de confidentialité ou d'intégrité des résultats de ces programmes.</p>
+            <p>
+                Cependant, le code exécuté côté serveur utilise la puissance de calcul du serveur. On peut trouver beaucoup d'hébergeurs gratuits pour un site sans code côté serveur (comme ce cours), mais il faut louer un serveur pour un site web avec exécution de code côté serveur (comme certaines des vos évaluations).
+            </p>
+            <h2>Les formulaires</h2>
+            <p>Une des interactions principale entre le visiteur et le site internet est la saisie d'information (nom, prénom, e-mail, mot de passe, image...). Pour que l'utilisateur puisse saisir des informations, on utilise souvent les formulaires (balise <mark class="code">&lt;form&gt;</mark>).</p>
+            <p>
+                A l'intérieur des formulaires, on utilise des éléments laissant à l'utilisateur la possibilité de saisir une information tels que :
+                <ul>
+                    <li>les champs de texte <mark class="code">&lt;input type="text"&gt;</mark></li>
+                    <li>les champs pour les mots de passe (les caractères saisis apparaissent sous la forme d'étoile ou de points) <mark class="code">&lt;input type="password"&gt;</mark></li>
+                    <li>les champs pour les nombres <mark class="code">&lt;input type="number"&gt;</mark></li>
+                    <li>Les cases à cocher <mark class="code">&lt;input type="checkbox"&gt;</mark></li>
+                    <li>Les menus déroulants <mark class="code">&lt;select&gt;</mark></li>
+                </ul>
+            </p>
+            <p>
+                Les données sont envoyés à l'aide d'un bouton jouant un rôle spécial (<mark class="code">&lt;input type="submit"&gt;</mark>). L'adresse URL où l'on doit envoyer les résultats est indiquée à l'intérieur de la balise <mark class="code">&lt;form&gt;</mark> à l'aide de l'attribut <mark class="code">action</mark>. On indique aussi, grâce à l'attribut <mark class="code">method</mark> la façon dont les données sont envoyés :
+                <ul>
+                    <li><mark class="code">GET</mark> pour que les données apparaissent à la fin de l'adresse URL.</li>
+                    <li><mark class="code">POST</mark> pour que les données n'apparaissent pas dans l'URL.</li>
+                </ul>
+            </p>
+            <div class="exercice">
+                Le but de ce premier exercice est d'écrire un site internet utilisant une interaction avec le visiteur 100 % côté client.
+                <ol>
+                    <li>Télécharger l'archive <a href="client.zip" download><mark class="code">client.zip</mark></a> et extraire les fichiers.
+                    <li>
+                        Le passage de la page <mark class="code">index.html</mark> à la page <mark class="code">formulaire.html</mark> est-il prévu par un lien ou par un bouton ?<br/>
+                    </li>
+                    <li>
+                        Nous allons maintenant étudier le formulaire de la page <mark class="code">formulaire.html</mark>
+                        <ol class="sous-num">
+                            <li>Compléter les attributs de la balise <mark class="code">&lt;form&gt;</mark> pour qu'il redirige l'utilisateur vers la page <mark class="code">secret.html</mark> avec la méthode <mark class="code">GET</mark>. Lorsque l'on utilise ce formulaire, comment apparaissent les données saisies par l'utilisateur ?</li>
+                            <li>Changer la méthode utilisée en <mark class="code">POST</mark>. Vérifier que lorsque l'on utilise ce formulaire, les données saisies par l'utilisateur n'apparaissent plus dans l'adresse URL.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Le fichier <mark class="code">script.js</mark> contient une fonction permettant de vérifier l'age saisi et de rediriger l'utilisateur sur la bonne page. <br/>
+                        Ajouter la ligne <mark class="code">&lt;script src="script.js"&gt;&lt;/script&gt;</mark> juste avant la balise <mark class="code">&lt;/body&gt;</mark> puis vérifier son fonctionnement en saississant un age supérieur à 12 puis inférieur à 12.
+                    </li>
+                    <li>
+                        Nous allons maintenant voir que le contrôle de l'âge côté client n'est pas suffisant.
+                        <ol class="sous-num">
+                            <li>Ouvrir <mark class="code">formulaire.html</mark> <b>avec Firefox</b></li>
+                            <li>Faites un clic droit puis choisissez <mark class="code">inspecter</mark></li>
+                            <li>Rechercher l'élément <mark class="code">form</mark> dans la structure du document HTML.</li>
+                            <li>Cliquer sur l'icone <mark class="code">event</mark> puis copier coller le code de la fonction <mark class="code">valider</mark>.</li>
+                            <li>Aller dans l'onglet <mark class="code">Console</mark></li>
+                            <li>Coller le code et modifier la ligne <mark class="code">if (age &gt; 11) {</mark> en <mark class="code">if (age &gt; 5) {</mark> avant de taper sur la touche <mark class="code">entrer</mark></li>
+                            <li>Saisissez votre prénom et l'age <mark class="code">7</mark> ans puis valider le formulaire.</li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+            <div class="exercice">
+                Le but de cet exercice est de mettre en place un serveur local écrit en Python pour programmer le contrôle de l'age côté serveur.
+                <ol>
+                    <li>Télécharger l'archive <a href="serveur.zip" download><mark class="code">serveur.zip</mark></a> et extraire les fichiers.<li>
+                    <li>
+                        Dans le fichier <mark class="code">main.py</mark>, modifier la fonction <mark class="code">post_formulaire</mark> pour qu'elle retourne la bonne page selon l'age de l'utilisateur.<bt/>
+                        <b>Indication :</b> L'instruction <mark class="code">request.forms.user_age</mark> permet de récupérer l'age saisi par l'utilisateur.
+                    </li>
+                    <li>Vérifier le fonctionnement du site :</li>
+                        <ol class="sous-num">
+                            <li>Ouvrir <mark class="code">main.py</mark> <b>avec Python</b></li>
+                            <li>Exécuter le programme.</li>
+                            <li>Avec un navigateur, rendez vous à l'adresse <a href=http://localhost:8080/>http://localhost:8080/</a>.</li>
+                        </ol>
+                </ol>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+    </body>
+</html>
