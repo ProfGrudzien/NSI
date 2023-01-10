@@ -63,9 +63,11 @@
                             <li>Ouvrir <mark class="code">formulaire.html</mark> <b>avec Firefox</b></li>
                             <li>Faites un clic droit puis choisissez <mark class="code">inspecter</mark></li>
                             <li>Rechercher l'élément <mark class="code">form</mark> dans la structure du document HTML.</li>
-                            <li>Cliquer sur l'icone <mark class="code">event</mark> puis copier coller le code de la fonction <mark class="code">valider</mark>.</li>
+                            <li>Cliquer sur l'icone <mark class="code">event</mark> puis copier le code de la fonction <mark class="code">valider</mark>.</li>
+                            <li>Decocher la case de la pop-up <mark class="code">event</mark></li>
                             <li>Aller dans l'onglet <mark class="code">Console</mark></li>
                             <li>Coller le code et modifier la ligne <mark class="code">if (age &gt; 11) {</mark> en <mark class="code">if (age &gt; 5) {</mark> avant de taper sur la touche <mark class="code">entrer</mark></li>
+                            <li>Toujours dans la console, taper l'instruction <mark class="code">formulaire.addEventListener("submit", valider)</mark> puis taper sur la touche <mark class="code">entrer</mark>.</li>
                             <li>Saisissez votre prénom et l'age <mark class="code">7</mark> ans puis valider le formulaire.</li>
                         </ol>
                     </li>
@@ -74,7 +76,7 @@
             <div class="exercice">
                 Le but de cet exercice est de mettre en place un serveur local écrit en Python pour programmer le contrôle de l'age côté serveur.
                 <ol>
-                    <li>Télécharger l'archive <a href="serveur.zip" download><mark class="code">serveur.zip</mark></a> et extraire les fichiers.<li>
+                    <li>Télécharger l'archive <a href="serveur.zip" download><mark class="code">serveur.zip</mark></a> et extraire les fichiers.</li>
                     <li>
                         Dans le fichier <mark class="code">main.py</mark>, modifier la fonction <mark class="code">post_formulaire</mark> pour qu'elle retourne la bonne page selon l'age de l'utilisateur.<bt/>
                         <b>Indication :</b> L'instruction <mark class="code">request.forms.user_age</mark> permet de récupérer l'age saisi par l'utilisateur.
