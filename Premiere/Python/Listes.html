@@ -249,6 +249,62 @@ longueur grâce à l'instruction <mark class="code">M = L[:]</mark>.
                 Ecrire une fonction qui retourne la liste des éléments positifs et la liste des éléments négatifs
 d’une liste de valeurs numériques.
             </div>
+            <h2>Application : répertoire téléphonique</h2>
+            <div class="exercice">
+                <p>
+                    L'objectif est de préparer le travail pour un futur développeur (qui s'occupera de l'interface graphique par exemple) en lui fournissant toutes les fonctions nécessaires pour utiliser un répertoire téléphonique. Il n'aura ainsi pas à se soucier de la façon dont sont stockées les informations.
+                </p>
+                <p>
+                    Pour le moment, seul le type <mark class="code">list</mark> vous permet de gérer ses informations. Mais on pourrait envisager d'utiliser les <mark class="code">tuples</mark> ou les <mark class="code">dictionnaires</mark> (au programme de première) ou bien les <mark class="code">arbres</mark> ou des <mark class="code">objets</mark> (au programme de terminale).
+                </p>
+                <p>
+                    Les informations d'un contact (nom et numéro de téléphone) seront stockées dans une liste et tous les contacts seront stockées dans une autre liste. Exemple&nbsp;: 
+                </p>
+                <div class="algo">
+                    <input type="button" class="copier" value="📑" title="copier">
+                    <p class="code">
+                        repertoire = [['Rosa', '0432500010'], ['Gauthier', '0490711596'], ['Hugues', '0490066100']]
+                    </p>
+                </div>
+                <ol>
+                    <li>Ecrire une fonction <mark class="code">creer_repertoire()</mark> qui retourne un répertoire vide (c'est-à-dire une liste vide !).</li>
+                    <li>Ecrire une fonction <mark class="code">ajouter_contact(repertoire, nom, numero)</mark> qui ajoute les données de ce contact au répertoire.</li>
+                    <li>
+                        <b>Facultatif :</b> créer une fonction <mark class="code">formater_numero</mark> qui retourne un numéro de téléphone en y ajoutant des points tous les deux chiffres. Par exemple, <mark class="code">formater_numero('0432500010')</mark> retourne <mark class="code">'04.32.50.00.10'</mark><br/>
+                        <i>Indice : pour récupérer des lettres, les chaînes de caractères fonctionnent comme les liste.</i>
+                    </li>
+                    <li>Ecrire une fonction <mark class="code">afficher_repertoire(repertoire)</mark> qui affiche les informations de tous les contacts (un par ligne).</li>
+                    <li>Ecrire une fonction <mark class="code">recherche_par_nom(repertoire, nom)</mark> qui retourne le numéro de téléphone du contact portant ce nom. Si aucun contact ne correspond, cette fonction retourne <mark class="code">None</mark></li>
+                    <li>Ecrire une fonction <mark class="code">recherche_par_numero(repertoire, numero)</mark> qui retourne le nom du contact portant ce nom. Si aucun contact ne correspond, cette fonction retourne <mark class="code">None</mark></li>
+                    <li>Modifier la fonction <mark class="code">ajouter_contact</mark> pour qu'elle ajoute le contact uniquement si le nom n'est pas déjà présent dans répertoire. Cette fonction retournera <mark class="code">True</mark> si l'ajout a eu lieu, <mark class="code">False</mark> sinon.</li>
+                    <li>Ecrire une fonction <mark class="code">supprimer_contact(repertoire, nom)</mark> pour qu'elle retire le contact portant ce nom du répertoire. Cette fonction retournera <mark class="code">True</mark> si le retrait a eu lieu, <mark class="code">False</mark> si aucun contact ne correspond à ce nom.</li>
+                    <li>Ecrire une fonction :<br/>
+                        <mark class="code">modifier_contact(repertoire, nom, nouveau_nom, nouveau_numero)</mark><br/> qui modifie le contact portant ce nom. Cette fonction retournera <mark class="code">True</mark> si la modification a eu lieu, <mark class="code">False</mark> si aucun contact ne correspond à ce nom. Cette fonction doit vérifier que le nouveau nom n'est pas déjà utilisé pour un autre contact.</li>
+                    <li>Ecrire une fonction <mark class="code">lister_noms(repertoire)</mark> qui retourne la liste de tous les noms présents dans le répertoire.</li>
+                    <li><b>Utilisation des répertoires :</b>
+                        <ol class="sous-num">
+                            <li>Créer un répertoire nommé <mark class="code">perso</mark></li>
+                            <li>Y ajouter 3 numéros dont <mark class="code">Ismaël</mark> : <mark class="code">0490710981</mark></li>
+                            <li>Vérifier le fonctionnent des différentes fonctions, notamment en :
+                                <ul>
+                                    <li>créant un nouveau répertoire nommé <mark class="code">pro</mark></li>
+                                    <li>en y déplaçant le contact ayant pour numéro <mark class="code">0490710981</mark>.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                    <li><b>Utilisation d'une interface graphique :</b>
+                        <ol class="sous-num">
+                            <li>Télécharger et extraire le fichier <a href='Repertoire.zip'><mark class="code">Repertoire.zip</mark></a></li>
+                            <li>Copier-coller votre fichier python dans le dossier extrait et renommer ce fichier <mark class="code">gestion_repertoire.py</mark></li>
+                            <li>Exécuter le fichier <mark class="code">app.py</mark></li>
+                            <li>Dans un navigateur, ouvrir le lien <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> et vérifier le bon fonctionnement du répertoire.<br/>
+                            <i>Remarque : à la fermeture de la page, les données du répertoire sont perdues. Nous verrons dans un autre chapitre comment les rendre persistantes.</i>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
             <h2>Application : tirage d'un LOTO</h2>
             <div class="exercice">
                 L'objectif est d'écrire un ensemble de fonction permettant de réaliser le tirage de jeton dans un LOTO, de générer et d'afficher des grilles puis de simuler des joueurs.
