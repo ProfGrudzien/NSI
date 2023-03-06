@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../../../style.css"/>
+        <link rel="stylesheet" href="Exerciseur.css"/>
+    </head>
+    <body>
+        <div class="main">
+            <h1>Représentation binaire des chaînes de caractères.</h1>
+            <h2>Encodage ASCII</h2>
+            <p>
+                Pour coder une chaîne de caractères en binaire, il faut coder chaque caractère en binaire.
+                Les premières approches consistent à décider d’un nombre de bits dédiés à l’encodage d’un caractère
+                puis de lister les codes binaires correspondants à chaque caractère.
+                Avant 1960, plusieurs tableaux de conversion binaire ↔ caractère existaient ce qui rendait difficile le partage de données.
+                Dans les années 60, une norme à vue le jour : le code ASCII (American Standard Code for Integration Interchange).
+            </p>
+            <p>
+                Pour mettre au point le code ASCII, les chercheurs ont listés les caractères indispensable à l’anglais.
+                Ils ont complété cette liste avec des caractères utilisés pour le formatage de l’affichage
+                ou ceux utilisés pour la saisie avec un clavier.
+                La liste contient alors 128 caractères,
+                ce qui permet d’utiliser seulement 7 bits pour coder un caractère.
+                Aujourd’hui, pour des raisons pratiques,
+                on complète ce code en ajoutant un 0 devant pour coder chaque caractère sur 1 octet.
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>En utilisant uniquement 7 bits, combien d’octets étaient nécessaires pour coder les textes suivants :</li>
+                    <ol class="sous-num">
+                        <li>Hello new world.</li>
+                        <li>Bonjour C3P0 !  </li>
+                        <li>Le code source de la page Wikipedia de l’encodage ASCII en anglais (280 317
+caractères).</li>
+                    </ol>
+                    <li>Aujourd’hui, en utilisant 1 octet pour coder chaque caractère, combien d’octets sont
+nécessaires pour coder ces mêmes textes ?</li>
+                </ol>
+            </div>
+            <figure>
+                <img src="ASCII.png">
+                <figcaption>Correspondance hexadécimal/caractères en ASCII</figcaption>
+            </figure>
+            <div class="exercice">
+                <ol>
+                    <li>Encoder en ASCII (sur 1 octet), le texte suivant : <mark class="code">Hello new world!</mark></li>
+                    <li>Le texte suivant est encodé en ASCII (sur 1 octet). Décoder ce texte :
+                        <p>
+                            0100 1100 0110 1001 0111 0110 0110 0101 0010 0000 0110 1100
+                            0110 1111 0110 1110 0110 0111 0010 0000 0110 0001 0110 1110
+                            0110 0100 0010 0000 0111 0000 0111 0010 0110 1111 0111 0011
+                            0111 0000 0110 0101 0111 0010 0010 0001
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <h2>Encodage latin</h2>
+            <p>
+                Le codage ASCII convient très bien à la programmation.
+                Il était notamment très adapté au langage HTML utilisé pour les pages web
+                car ce langage dispose de commande pour l’insertion de caractères accentués ou spéciaux.
+            </p>
+            <p>
+                Cependant, pour les textes dans des langues différentes, 
+                le langage ASCII ne permet pas de représenter les caractères accentués.
+                Toujours dans le même principe, il a été décidé de coder chaque caractère sur 1 octet.
+                En laissant le premier bit à 0, on obtient les caractères de l’encodage ASCII,
+                mais en passant ce premier bit à 1, on dispose de 128 codes pour encoder autant de nouveaux caractères.
+            </p>
+            <p>
+                Les besoins étant différents selon les langues (langues latines, grecques ou cyrilliques
+                par exemple), on utiliser plusieurs encodage différents. Voici le tableau pour l’encodage
+                latin-1 utilisé pour les langues latines : français, allemand, espagnol, ...
+            </p>
+            <figure>
+                <img src="Latin-1.png">
+                <figcaption>Correspondance hexadécimal/caractères en Latin-1</figcaption>
+            </figure>
+            <p>
+                Ce tableau à double entrées donne les 4 premiers bits en hexadécimal (en début de ligne)
+                puis les 4 derniers (en haut de colonne).
+            </p>
+            <div class="exercice">
+                <ol>
+                    <li>Encoder en Latin-1, le texte suivant : Être ou ne pas être...</mark></li>
+                    <li>Le texte suivant est encodé en Latin-1. Décoder ce texte :
+                        <p>
+                            0101 0011 0110 1111 0110 1001 0111 0011 0101 1111 0111 0100 0110
+                            1111 0110 1001 0111 1110 0110 1101 1110 1010 0110 1101 0110 0101
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <h2>Encodage Unicode</h2>
+            <p>
+                Les différents encodages fournissant les caractères des différentes langues utilisés posent
+                les mêmes problèmes qu’avant l’ASCII. Les trop nombreux encodages différents rendent
+                plus difficile les échanges de documents. Une solution serait d’augmenter le nombre de
+                bits utilisés pour coder chaque caractère. Dans ce cas, soit on continue de restreindre le
+                nombre de caractères disponibles, soit on accepte d’augmenter de manière significative
+                la taille en mémoire des chaînes de caractères.
+            </p>
+            <p>
+                Une autre solution a donc vu le jour en 1991 : l’Unicode. Il ne s’agît pas à proprement
+                dit d’un encodage, mais plutôt d’une façon de lister tous les caractères utilisés dans
+                le monde. Actuellement, Unicode contient 143 859 caractères, couvrant plus de 150
+                écritures. Unicode est prévu pour être adaptable aux nouveaux caractères. Ainsi, de
+                2014 à 2020, entre 554 et 8 518 caractères ont été ajoutés chaque année.
+            </p>
+            <p>
+                Pour coder un texte selon le principe de l’Unicode, il faut utiliser un encodage compatible.
+                Parmi eux, on peut citer utf-8, utf-16 et utf-32 (Universal Character Set Transformation
+                Format) qui fonctionnent quasiment sur le même principe.
+            </p>
+            <p>
+                En utf-8, les caractères sont codés sur un multiple de 8 bits, c’est-à-dire sur 1 ou plusieurs
+                octets. La longueur variable associée aux caractères permet de limiter l’espace mémoire
+                utilisé pour les caractères les plus courants tout en permettant d’écrire des caractères
+                très peu courant. Utf-8 permet de plus de coder les caractères disponibles en ASCII avec
+                la même représentation sur 1 octet.
+            </p>
+            <ul>
+                <li>
+                    Les 128 premiers caractères (ceux disponibles en ASCII) sont codés sous la forme
+                    <p class="centrer">0xxx xxxx</p>
+                </li>
+                <li>
+                    Les 2048 suivants sont codés sous la forme
+                    <p class="centrer">110x xxxx 10xx xxxx</p>
+                </li>
+                <li>
+                    Les 65 536 suivants sont codés sous la forme
+                    <p class="centrer">1110 xxxx 10xx xxxx 10xx xxxx</p>
+                </li>
+                <li>
+                    Tous les autres caractères sont codés sous une des formes :
+                    <p class="centrer">1111 00xx 10xx xxxx 10xx xxxx 10xx xxxx</p>
+                    <p class="centrer">1111 0100 1000 xxxx 10xx xxxx 10xx xxxx</p>
+                </li>
+            </ul>
+            <p>
+                Remarques :
+                <ul>
+                    <li>Les représentations binaire de 1 à 4 octets ne sont pas toutes utilisées, par exemple celles de la forme 110x xxxx 11xx xxxx</li>
+                    <li>Les codes valides en utf-8 ne sont pas tous associés à un caractères. ils le seront peut-être un jour.</li>
+                </ul>
+            </p>
+            <p>
+                L’affichage des chaînes de caractères codées en utf-8 dépend aussi des caractères disponibles dans la police utilisée.
+                Par exemple, la version de l’interface de Python IDLE utilisé au lycée ne prends pas en charges toutes les émoticônes
+                alors qu’elles sont codables en utf-8.
+            </p>
+            <p>
+                Actuellement, Windows 11 n'utilise toujours pas l'unicode par défaut.
+                L'encodage utilisé est Windows-1252, une extension de latin-1, également appelé ISO 8859-1.
+            </p>
+        </div>
+        <script type="text/javascript" src="../../../script.js"></script>
+        <script type="text/javascript" src="Exerciseur.js"></script>
+    </body>
+</html>
