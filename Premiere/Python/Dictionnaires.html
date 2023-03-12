@@ -172,6 +172,36 @@
                     <li>Combien de points rapportent les mots <mark class="code">CLEMENTINE</mark>, <mark class="code">PIZZA</mark> et <mark class="code">KIWI</mark> ?</li>
                 </ol>
             </div>
+            <h3>Dates comme dictionnaire</h3>
+            Nous allons utiliser des dictionnaires pour gérer les dates.
+            Cela permettra de créer un module pour l'utiliser dans d'autres projets.
+            <div class="exercice">
+                <ol>
+                    <li>Ecrire une fonction <mark class="code">nouvelle_date(jour, mois, annee)</mark> permettant de créer un dictionnaire représentant cette date.</li>
+                    <li>Ecrire une fonction <mark class="code">formater_date(date)</mark> retournant un texte représentant la date associée au dictionnaire <mark class="code">date</mark> en suivant le format <mark class="code">JJ/MM/AAAA</mark>.</li>
+                    <li>Ecrire une fonction <mark class="code">comparer(dateA, dateB)</mark> qui retourne <mark class="code">True</mark> si la <mark class="code">dateA</mark> se situe avant ou le même jour que la <mark class="code">dateB</mark>. Dans le cas contraire, cette fonction retourne <mark class="code">False</mark></li>
+                    <li>Tester vos fonctions en fin de fichier.</li>
+                    <li>En plaçant le fichier python dans le même dossier qu'un autre projet,
+                        il devient disponible comme module grâce à l'instruction <mark class="code">import</mark>.
+                        Pour garder une trace des tests sans que les résultats ne s'affiche lorsque l'on importe ce module,
+                        on peut les placer après le test <mark class="code">if __name__ == '__main__' :</mark>. Exemple :
+                        <div class="algo">
+                            <input type="button" class="copier" value="📑" title="copier">
+                            <p class="code">
+                                if __name__ == '__main__' :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; Ada = nouvelle_date(10, 12, 1815)<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; Charles = nouvelle_date(26, 12, 1791)<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; print("Ada Lovelace :", formater_date(Ada))<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; print("Charles Babbage :", formater_date(Charles))<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; if comparer(Ada, Charles) :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print("Ada Lovelace est née avant Charles Babbage.")<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp; else :<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; print("Charles Babbage est née avant Ada Lovelace.")
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
             <h3>TODO liste</h3>
             <p>
                 Une TODO liste est une liste de choses à faire d'urgence.
