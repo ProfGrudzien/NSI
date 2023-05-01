@@ -15,10 +15,18 @@
                     with open("data.txt", "r") as fichier : <br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;lignes = fichier.readlines() <br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;for ligne in lignes :<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(ligne, end='')<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;texte = ligne[:-1]<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(texte)<br/>
                 </p>
             </div>
-            <p>Remarques : la lettre <mark class='code'>r</mark> signifie ouverture en lecture (read en anglais). Les lignes lues dans le fichiers se terminent par le caractère "retour à la ligne". Au moment de l'affichage, il ne faut pas en ajouter un deuxième, il faut donc ajouter <mark class='code'>end=''</mark> dans l'instruction <mark class='code'>print</mark>.</p>
+            <p>Remarques :
+                <ul>
+                    <li>la lettre <mark class='code'>r</mark> signifie ouverture en lecture (read en anglais).</li>
+                    <li>Dans ce programme, la variable <mark class='code'>lignes</mark> est une liste.</li>
+                    <li>Les lignes lues dans le fichiers se terminent par le caractère "retour à la ligne".
+                        Ce caractère est retiré grâce à l'instruction <mark class='code'>texte = ligne[:-1]</mark> car la fonction <mark class='code'>print</mark> en ajoute aussi un.</li>
+                </ul>        
+            </p>
             <div class="exercice">
                 <ol>
                     <li>A l'aide d'un éditeur de texte, créer un fichier <mark class='code'>fruits.txt</mark> en y écrivant 3 noms de fruits, un par ligne.</li>
@@ -39,7 +47,12 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;fichier.write("coucou\n")
                 </p>
             </div>
-            <p>Remarques : la lettre <mark class='code'>w</mark> signifie ouverture en écriture (write en anglais). On doit ajouter manuellement les retours à la ligne en utilisant <mark class='code'>\n</mark>.</p>
+            <p>Remarques :
+                <ul>
+                    <li>la lettre <mark class='code'>w</mark> signifie ouverture en écriture (write en anglais).</li>
+                    <li>On doit ajouter manuellement les retours à la ligne en utilisant <mark class='code'>\n</mark>.</li>
+                </ul>
+            </p>
             <h3>Compléter le contenu d'un fichier.</h3>
             <div class="algo">
                 <input type="button" class="copier" value="📑" title="copier">
